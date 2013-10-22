@@ -1,4 +1,4 @@
-vaadinAutoforms
+vaadinAutoForms
 ===============
 
-Easy creation of forms in Vaadin
+Vaadin AutoForms
