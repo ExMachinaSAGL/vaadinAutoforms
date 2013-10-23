@@ -21,9 +21,4 @@ public class LocalizedWithOneFieldForm extends AbstractFormCreator<TestModel> im
 		return "LocalizedName";
 	}
 
-	@Override
-	public String getItemCaptionFor(String itemId) {
-		return "LocalizedItem:" + itemId;
-	}
-
 }

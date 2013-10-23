@@ -75,17 +75,7 @@ public class FormField implements FormComponent {
 		fieldLabel.setValue(formCreator.getLabelFor(fieldName));
 		fieldLabel.addStyleName(formCreator.getStyleNameFor(fieldName) + "-label");
 		field.addStyleName(formCreator.getStyleNameFor(fieldName) + "-field");
-		if (field instanceof AbstractSelect) {
-			setupSelectItems((AbstractSelect) field, formCreator);
-		}
 		return this;
-	}
-
-	private void setupSelectItems(AbstractSelect field, FormCreator formCreator) {
-		for (Object itemId : field.getItemIds()) {
-			String itemCaption = formCreator.getItemLabelFor(itemId.toString());
-			field.setItemCaption(itemId, itemCaption);
-		}
 	}
 
 	@Override

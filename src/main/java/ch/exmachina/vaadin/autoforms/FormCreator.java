@@ -189,12 +189,6 @@ public abstract class FormCreator<T> {
 		return fieldName;
 	}
 
-	public String getItemLabelFor(String itemId) {
-		if (this instanceof LocalizedForm)
-			return ((LocalizedForm) this).getItemCaptionFor(itemId);
-		return itemId;
-	}
-
 	public String getStyleNameFor(String fieldName) {
 		return String.format(this.getClass().getSimpleName() + "-" + fieldName);
 	}

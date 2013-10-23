@@ -5,5 +5,4 @@ package ch.exmachina.vaadin.autoforms;
  */
 public interface LocalizedForm {
 	String getMessageFor(String label);
-	String getItemCaptionFor(String itemId);
 }
