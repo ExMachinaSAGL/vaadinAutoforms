@@ -8,7 +8,8 @@ import ch.exmachina.vaadin.autoforms.FormCreator;
 public abstract class AbstractFormCreator<T> extends FormCreator<T>{
 
 	protected AbstractFormCreator(T bean) {
-		super(bean);
+		super();
+		initWithBean(bean);
 	}
 
 	@Override

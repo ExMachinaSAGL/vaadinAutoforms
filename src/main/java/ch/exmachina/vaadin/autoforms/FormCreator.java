@@ -23,24 +23,12 @@ public abstract class FormCreator<T> {
 	private BeanFieldGroup binder;
 	private T bean;
 
-	@Deprecated
-	protected FormCreator(T bean) {
-		this.bean = bean;
-	}
-
-	@Deprecated
-	public void initForm() {
+	protected FormCreator() {
 		initFields();
 		mainLayout = new FormGridRender(this).render();
-		bindToBean();
-	}
-
-	protected FormCreator() {
 	}
 
 	protected final void initWithBean(T bean) {
-		initFields();
-		mainLayout = new FormGridRender(this).render();
 		this.bean = bean;
 		bindToBean();
 	}

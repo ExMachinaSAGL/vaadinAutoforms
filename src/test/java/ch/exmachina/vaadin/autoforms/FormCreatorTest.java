@@ -24,21 +24,13 @@ public class FormCreatorTest {
 	@Before
 	public void setup() {
 		formWithOneField = new OneFieldOnFirstRow();
-		formWithOneField.initForm();
 		formWithAComboBox = new OneFieldWithComboBox();
-		formWithAComboBox.initForm();
 		formWithTwoFieldOnSameRow = new TwoFieldOnSameRow();
-		formWithTwoFieldOnSameRow.initForm();
 		formWithTwoFieldsOnTwoRow = new TwoFieldOnDifferentRows();
-		formWithTwoFieldsOnTwoRow.initForm();
 		formWithOneFieldAndTwoButton = new OneFieldWithOkAndCancelButton();
-		formWithOneFieldAndTwoButton.initForm();
 		localizedFormWithOneField = new LocalizedWithOneFieldForm();
-		localizedFormWithOneField.initForm();
 		formWithOneFieldReadOnly = new OneFieldOnFirstRowReadOnly();
-		formWithOneFieldReadOnly.initForm();
 		formWithOneFieldAndButtonOnSameRow = new OneFieldOnFirstRowWithButton();
-		formWithOneFieldAndButtonOnSameRow.initForm();
 	}
 
 	private GridLayout getFormCreatorContainer (FormCreator form) {
