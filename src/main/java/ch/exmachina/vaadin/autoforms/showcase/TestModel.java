@@ -6,9 +6,14 @@ package ch.exmachina.vaadin.autoforms.showcase;
 public class TestModel {
 	private String name = "OneFieldValue";
 	private String surname = "OneFieldValue";
-	private String desciption = "OneFieldValue";
+	private String description = "OneFieldValue";
 	private String itwork = "OneFieldValue";
 	public String multichoice = "FirstSelection";
+	public String nullField = null;
+
+	public String getNullField() {
+		return nullField;
+	}
 
 	public String getSurname() {
 		return surname;
@@ -18,12 +23,12 @@ public class TestModel {
 		this.surname = surname;
 	}
 
-	public String getDesciption() {
-		return desciption;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesciption(String desciption) {
-		this.desciption = desciption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getItwork() {

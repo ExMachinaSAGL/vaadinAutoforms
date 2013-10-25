@@ -5,6 +5,8 @@ import com.vaadin.ui.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 /**
@@ -69,8 +71,6 @@ public class FormCreatorTest {
 		Label oneFieldLabel = getLabelForField(formWithOneField, 0, 0);
 		assertEquals(oneFieldLabel.getValue(), "name");
 	}
-
-
 
 	@Test
 	public void formWithTwoFieldOneSameRow() {

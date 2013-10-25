@@ -3,9 +3,7 @@ package ch.exmachina.vaadin.autoforms;
 import ch.exmachina.vaadin.autoforms.containers.FilteredContainer;
 import com.vaadin.data.Container;
 import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.ui.AbstractField;
-import com.vaadin.ui.AbstractSelect;
-import com.vaadin.ui.Label;
+import com.vaadin.ui.*;
 
 /**
  * @autor Marco Manzi
@@ -43,6 +41,10 @@ public class FormField implements FormComponent {
 		this.fieldName = fieldName;
 		fieldLabel = new Label(this.fieldName, ContentMode.HTML);
 		fieldLabel.setSizeUndefined();
+
+		if (field instanceof AbstractTextField) {
+			((AbstractTextField)field).setNullRepresentation("");
+		}
 	}
 
 	/**
