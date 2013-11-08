@@ -1,12 +1,12 @@
 package ch.exmachina.vaadin.autoforms;
 
-import com.vaadin.data.Item;
+import com.vaadin.data.*;
 import com.vaadin.data.util.IndexedContainer;
-import com.vaadin.server.Resource;
+import com.vaadin.server.*;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.BaseTheme;
 
-import java.util.UUID;
+import java.util.*;
 
 public class FormTable extends FormField {
 
@@ -16,8 +16,8 @@ public class FormTable extends FormField {
 
 	private Resource deleteButtonIcon;
 
-	public FormTable(String fieldName, TableColumn...columns) {
-		super(fieldName, Table.class);
+	public FormTable(String fieldName, TableColumn... columns) {
+		super(fieldName, ImplicitSelectionTable.class);
 		this.columns = columns;
 
 		IndexedContainer container = new IndexedContainer();
@@ -29,6 +29,7 @@ public class FormTable extends FormField {
 
 		getTable().setContainerDataSource(container);
 		getTable().setEditable(true);
+		getTable().setMultiSelect(true);
 	}
 
 	@Override
@@ -46,12 +47,11 @@ public class FormTable extends FormField {
 		this.deleteButtonIcon = deleteButtonIcon;
 	}
 
-	public void addRow(Object...colValues) {
+	public void addRow(final Object itemId, Object... colValues) {
 		if (colValues.length != columns.length) {
 			throw new RuntimeException("The number of value must be equal to the number of columns");
 		}
 
-		final String itemId = UUID.randomUUID().toString();
 		Item item = getTable().addItem(itemId);
 
 		for (int i = 0; i < colValues.length; i++) {
