@@ -27,6 +27,7 @@ public class FormTable extends FormField {
 
 		getTable().setContainerDataSource(container);
 		getTable().setEditable(true);
+		getTable().setSelectable(true);
 		getTable().setMultiSelect(true);
 	}
 
