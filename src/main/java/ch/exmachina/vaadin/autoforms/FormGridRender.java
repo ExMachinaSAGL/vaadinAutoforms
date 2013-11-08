@@ -118,7 +118,11 @@ public class FormGridRender {
 	private int evaluateColumnsToAddForField(LinkedList<FormComponent> rowFields) {
 		int numberOfInputs = formCreator.getInputFields(rowFields).size();
 		int maxNumberOfColumnForFields = gridColumnNum - formCreator.getButtonFields(rowFields).size();
-		return (maxNumberOfColumnForFields - numberOfInputs) / numberOfInputs - 1;
+		if (numberOfInputs != 0) {
+			return (maxNumberOfColumnForFields - numberOfInputs) / numberOfInputs - 1;
+		} else {
+			return maxNumberOfColumnForFields - 1;
+		}
 	}
 
 }
