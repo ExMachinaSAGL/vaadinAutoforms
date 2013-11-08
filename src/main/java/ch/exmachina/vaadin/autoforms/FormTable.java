@@ -1,12 +1,10 @@
 package ch.exmachina.vaadin.autoforms;
 
-import com.vaadin.data.*;
+import com.vaadin.data.Item;
 import com.vaadin.data.util.IndexedContainer;
-import com.vaadin.server.*;
+import com.vaadin.server.Resource;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.BaseTheme;
-
-import java.util.*;
 
 public class FormTable extends FormField {
 
