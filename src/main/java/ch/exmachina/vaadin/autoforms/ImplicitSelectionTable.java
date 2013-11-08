@@ -8,8 +8,4 @@ public class ImplicitSelectionTable extends Table {
 		setValue(getItemIds());
 		return super.getValue();
 	}
-
-	public boolean isRequired() {
-		return false;
-	}
 }
