@@ -9,7 +9,7 @@ import com.vaadin.ui.*;
  * @autor Marco Manzi
  */
 public class FormField implements FormComponent {
-	private AbstractField field;
+	protected AbstractField field;
 	private Label fieldLabel;
 	private String fieldName;
 	private boolean immediate = true;
@@ -17,7 +17,7 @@ public class FormField implements FormComponent {
 	private boolean readOnly = false;
 
 	/**
-	 * Create a form field, witha a field that is instance of fieldClass
+	 * Create a form field, with a field that is instance of fieldClass
 	 *
 	 * @param fieldName
 	 * @param fieldClass
