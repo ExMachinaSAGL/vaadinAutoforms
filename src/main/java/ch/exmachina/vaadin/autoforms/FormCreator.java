@@ -1,27 +1,29 @@
 package ch.exmachina.vaadin.autoforms;
 
 import ch.exmachina.vaadin.autoforms.containers.utils.ContainerUtils;
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.fieldgroup.FieldGroup;
+import com.vaadin.data.fieldgroup.*;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @autor Marco Manzi
  */
 public abstract class FormCreator<T> {
+	LinkedList<LinkedList<FormComponent>> components = new LinkedList<LinkedList<FormComponent>>();
+
+	LinkedList<FormButton> buttons = new LinkedList<FormButton>();
+
 	private Layout mainLayout;
 
-	LinkedList<LinkedList<FormComponent>> components = new LinkedList<LinkedList<FormComponent>>();
-	LinkedList<FormButton> buttons = new LinkedList<FormButton>();
 	private Map<String, FormField> fieldsOfForm = new HashMap<String, FormField>();
+
 	private BeanFieldGroup binder;
+
 	private T bean;
+
+	private ValidationManager validationManager = new ValidationManager();
 
 	protected FormCreator() {
 		initFields();
@@ -40,7 +42,7 @@ public abstract class FormCreator<T> {
 	}
 
 	private void setDefaultStylesOnElements() {
-	 	for (FormField field: getAllComponent()) {
+		for (FormField field : getAllComponent()) {
 			field.getField().setHeight(24, Sizeable.Unit.PIXELS);
 		}
 	}
@@ -70,24 +72,8 @@ public abstract class FormCreator<T> {
 		}
 	}
 
-	/**
-	 * Update the form with the values of bean
-	 *
-	 * @param bean the bean with values to show in form
-	 */
-	public void setBean(T bean) {
-		setValueOnSelectLazyLoadedValues(bean);
-		binder.setItemDataSource(bean);
-		for (String fieldName : fieldsOfForm.keySet()) {
-			FormField formField = fieldsOfForm.get(fieldName);
-			if (formField.isReadOnly()) {
-				formField.getField().setReadOnly(true);
-			}
-		}
-	}
-
 	private void setValueOnSelectLazyLoadedValues(T bean) {
-		for (String fieldName: fieldsOfForm.keySet()) {
+		for (String fieldName : fieldsOfForm.keySet()) {
 			FormField formField = fieldsOfForm.get(fieldName);
 			ContainerUtils.setOnSelectContainerBeanValue(bean, fieldName, formField.getField());
 		}
@@ -117,6 +103,22 @@ public abstract class FormCreator<T> {
 		return (T) binder.getItemDataSource().getBean();
 	}
 
+	/**
+	 * Update the form with the values of bean
+	 *
+	 * @param bean the bean with values to show in form
+	 */
+	public void setBean(T bean) {
+		setValueOnSelectLazyLoadedValues(bean);
+		binder.setItemDataSource(bean);
+		for (String fieldName : fieldsOfForm.keySet()) {
+			FormField formField = fieldsOfForm.get(fieldName);
+			if (formField.isReadOnly()) {
+				formField.getField().setReadOnly(true);
+			}
+		}
+	}
+
 	protected T getNotBindedBean() {
 		return bean;
 	}
@@ -124,8 +126,8 @@ public abstract class FormCreator<T> {
 	protected void addRow(FormComponent... fields) {
 		LinkedList<FormComponent> fieldsOfRow = new LinkedList<FormComponent>(Arrays.asList(fields));
 		components.add(fieldsOfRow);
-		for (FormComponent field: fields) {
-			if (field instanceof FormField){
+		for (FormComponent field : fields) {
+			if (field instanceof FormField) {
 				FormField formField = (FormField) field;
 				fieldsOfForm.put(formField.getFieldName(), formField);
 			}
@@ -138,7 +140,7 @@ public abstract class FormCreator<T> {
 
 	LinkedList<FormField> getInputFields(LinkedList<FormComponent> rowFields) {
 		LinkedList<FormField> formFields = new LinkedList<FormField>();
-		for (FormComponent comp: rowFields) {
+		for (FormComponent comp : rowFields) {
 			if (comp.getType().equals(FormType.FIELD)) {
 				formFields.add((FormField) comp);
 			}
@@ -148,7 +150,7 @@ public abstract class FormCreator<T> {
 
 	LinkedList<FormButton> getButtonFields(LinkedList<FormComponent> rowFields) {
 		LinkedList<FormButton> formFields = new LinkedList<FormButton>();
-		for (FormComponent comp: rowFields) {
+		for (FormComponent comp : rowFields) {
 			if (comp.getType().equals(FormType.BUTTON)) {
 				formFields.add((FormButton) comp);
 			}
@@ -161,6 +163,8 @@ public abstract class FormCreator<T> {
 	 */
 	private void bindToBean() {
 		binder = new BeanFieldGroup(bean.getClass());
+		validationManager.addRequiredValidationAndValidateOnBlur(binder);
+
 		for (String fieldName : fieldsOfForm.keySet()) {
 			FormField formField = fieldsOfForm.get(fieldName);
 			if (formField.useBinder()) {
