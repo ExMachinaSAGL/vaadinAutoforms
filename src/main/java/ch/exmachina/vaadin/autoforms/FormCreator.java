@@ -164,6 +164,7 @@ public abstract class FormCreator<T> {
 	private void bindToBean() {
 		binder = new BeanFieldGroup(bean.getClass());
 		validationManager.addRequiredValidationAndValidateOnBlur(binder);
+		validationManager.setErrorMessage(getLabelFor(ValidationManager.KEY_REQUIRED_ERROR));
 
 		for (String fieldName : fieldsOfForm.keySet()) {
 			FormField formField = fieldsOfForm.get(fieldName);
@@ -176,8 +177,9 @@ public abstract class FormCreator<T> {
 	}
 
 	public String getLabelFor(String fieldName) {
-		if (this instanceof LocalizedForm)
+		if (this instanceof LocalizedForm) {
 			return ((LocalizedForm) this).getMessageFor(this.getClass().getSimpleName() + ".form." + fieldName);
+		}
 		return fieldName;
 	}
 

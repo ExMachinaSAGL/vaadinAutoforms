@@ -8,9 +8,9 @@ import com.vaadin.ui.*;
 
 public class ValidationManager {
 
-	//private static final String KEY_REQUIRED_ERROR = ValidationManager.class.getSimpleName() + ".requiredErrorMessage";
+	public static final String KEY_REQUIRED_ERROR = ValidationManager.class.getSimpleName() + ".requiredErrorMessage";
 
-	private ErrorMessage requiredError = new UserError("XXX");
+	private String errorMessage;
 
 	public void addRequiredValidationAndValidateOnBlur(FieldGroup fieldGroup) {
 		fieldGroup.addCommitHandler(new CommitHandler() {
@@ -43,7 +43,15 @@ public class ValidationManager {
 
 	private void setRequiredError(Field<?> field) {
 		if (field.isRequired()) {
-			((AbstractComponent) field).setComponentError(field.getValue() == null ? requiredError : null);
+			((AbstractComponent) field).setComponentError(field.getValue() == null ? new UserError(getErrorMessage()) : null);
 		}
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
 	}
 }

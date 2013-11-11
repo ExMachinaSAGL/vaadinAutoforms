@@ -15,7 +15,7 @@ public class FormTable extends FormField {
 	private Resource deleteButtonIcon;
 
 	public FormTable(String fieldName, TableColumn... columns) {
-		super(fieldName, ImplicitSelectionTable.class);
+		super(fieldName, Table.class);
 		this.columns = columns;
 
 		IndexedContainer container = new IndexedContainer();
