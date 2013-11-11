@@ -17,10 +17,6 @@ public class FormGridRender {
 	HorizontalLayout buttonLayout;
 	private FormCreator formCreator;
 
-	FormGridRender() {
-
-	}
-
 	FormGridRender(FormCreator formCreator) {
 		this.formCreator = formCreator;
 		initButtonLayout();

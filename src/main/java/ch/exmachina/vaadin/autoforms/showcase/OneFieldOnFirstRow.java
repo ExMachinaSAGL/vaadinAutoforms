@@ -15,7 +15,11 @@ public class OneFieldOnFirstRow extends AbstractFormCreator<TestModel> {
 
 	protected void initFields() {
 		addRow(new FormField("name", TextField.class));
+
 	}
 
-
+	@Override
+	protected void beforeRendering() {
+		getComponent("name").setRequired(true);
+	}
 }

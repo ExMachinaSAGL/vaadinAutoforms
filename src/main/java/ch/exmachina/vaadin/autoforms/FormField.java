@@ -2,6 +2,7 @@ package ch.exmachina.vaadin.autoforms;
 
 import ch.exmachina.vaadin.autoforms.containers.FilteredContainer;
 import com.vaadin.data.Container;
+import com.vaadin.data.Validator;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 
@@ -83,6 +84,10 @@ public class FormField implements FormComponent {
 	@Override
 	public FormType getType() {
 		return FormType.FIELD;
+	}
+
+	public void setRequired(boolean b) {
+		this.getField().setRequired(true);
 	}
 
 	public AbstractField getField() {

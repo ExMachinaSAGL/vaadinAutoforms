@@ -68,7 +68,8 @@ public abstract class FormCreator<T> {
 			binder.commit();
 			return (T) binder.getItemDataSource().getBean();
 		} catch (FieldGroup.CommitException e) {
-			throw new IllegalArgumentException(e);
+//			throw new IllegalArgumentException(e);
+			return null;
 		}
 	}
 
