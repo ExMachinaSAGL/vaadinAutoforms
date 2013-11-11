@@ -5,6 +5,7 @@ import com.vaadin.data.fieldgroup.FieldGroup.*;
 import com.vaadin.event.FieldEvents.*;
 import com.vaadin.server.*;
 import com.vaadin.ui.*;
+import org.apache.commons.lang3.*;
 
 public class ValidationManager {
 
@@ -43,7 +44,9 @@ public class ValidationManager {
 
 	private void setRequiredError(Field<?> field) {
 		if (field.isRequired()) {
-			((AbstractComponent) field).setComponentError(field.getValue() == null ? new UserError(getErrorMessage()) : null);
+			Object value = field.getValue();
+			boolean nullOrBlank = value == null || (value.getClass().isAssignableFrom(String.class) && StringUtils.isBlank((String) value));
+			((AbstractComponent) field).setComponentError(nullOrBlank ? new UserError(getErrorMessage()) : null);
 		}
 	}
 
