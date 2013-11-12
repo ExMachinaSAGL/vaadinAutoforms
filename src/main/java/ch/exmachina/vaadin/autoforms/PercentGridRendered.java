@@ -1,5 +1,6 @@
 package ch.exmachina.vaadin.autoforms;
 
+import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
@@ -24,12 +25,20 @@ public class PercentGridRendered implements GridRender {
 	public GridLayout render(FormCreator formCreator) {
 		LinkedList<LinkedList<FormComponent>> components = formCreator.components;
 		LinkedList<LinkedList<FormComponent>> designedComponents = designer.addPercents(components);
-		mainLayout = new GridLayout(100, designedComponents.size());
+		initMainLayout(designedComponents);
 		int rowIndex = 0;
 		for (LinkedList<FormComponent> rowComponents: components) {
 			addElementsToRow(rowComponents, rowIndex++);
 		}
 		return mainLayout;
+	}
+
+	private void initMainLayout(LinkedList<LinkedList<FormComponent>> designedComponents) {
+		mainLayout = new GridLayout(100, designedComponents.size());
+		mainLayout.setSpacing(true);
+		mainLayout.setMargin(true);
+		mainLayout.setSizeFull();
+		mainLayout.setHeight(-1, Sizeable.Unit.PIXELS);
 	}
 
 	private void addElementsToRow(LinkedList<FormComponent> rowComponents, int rowIndex) {

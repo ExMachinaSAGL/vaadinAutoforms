@@ -128,6 +128,10 @@ public abstract class FormCreator<T> {
 		return bean;
 	}
 
+	/**
+	 * Add a row to the form, the fields can have a width's sum  <= 100
+	 * @param fields
+	 */
 	protected void addRow(FormComponent... fields) {
 		LinkedList<FormComponent> fieldsOfRow = new LinkedList<FormComponent>(Arrays.asList(fields));
 		components.add(fieldsOfRow);
@@ -139,6 +143,14 @@ public abstract class FormCreator<T> {
 		}
 	}
 
+	/**
+	 * Deprecated, it's used only in the form grid rendere to add button to a
+	 * row after all other fields.
+	 * Call addRow with a FormButton inside to add buttons
+	 *
+	 * @param buttons
+	 */
+	@Deprecated
 	protected void addButton(FormButton... buttons) {
 		this.buttons.addAll(new LinkedList<FormButton>(Arrays.asList(buttons)));
 	}
