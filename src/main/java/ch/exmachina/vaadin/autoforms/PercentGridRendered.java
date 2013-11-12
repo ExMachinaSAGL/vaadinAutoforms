@@ -2,9 +2,7 @@ package ch.exmachina.vaadin.autoforms;
 
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.HorizontalLayout;
 
 import java.util.LinkedList;
 
@@ -13,16 +11,24 @@ import java.util.LinkedList;
  */
 public class PercentGridRendered implements GridRender {
 	private GridLayout mainLayout;
-	private int LABEL_CONSTANT_COLS = 14;
+	private int labelWidth = 14;
+	private static final int LABEL_WIDTH_DEFAULT = 14;
 
 	private PercentGridDesigner designer;
+	private FormCreator formCreator;
 
 	public PercentGridRendered() {
+		this(0);
+	}
+
+	public PercentGridRendered(int labelWidth) {
+		this.labelWidth = labelWidth > 0? labelWidth: LABEL_WIDTH_DEFAULT;
 		designer = new PercentGridDesigner();
 	}
 
 	@Override
 	public GridLayout render(FormCreator formCreator) {
+		this.formCreator = formCreator;
 		LinkedList<LinkedList<FormComponent>> components = formCreator.components;
 		LinkedList<LinkedList<FormComponent>> designedComponents = designer.addPercents(components);
 		initMainLayout(designedComponents);
@@ -44,6 +50,7 @@ public class PercentGridRendered implements GridRender {
 	private void addElementsToRow(LinkedList<FormComponent> rowComponents, int rowIndex) {
 		int colIndex = 0;
 		for (FormComponent inRow: rowComponents) {
+			inRow.setupForForm(formCreator);
 			switch (inRow.getType()) {
 				case FIELD: addFieldToRow((FormField) inRow, colIndex, rowIndex); break;
 				case BUTTON: addButtonToRow((FormButton)inRow, colIndex, rowIndex); break;
@@ -61,10 +68,10 @@ public class PercentGridRendered implements GridRender {
 
 	private void addFieldToRow(FormField inRow, int colIndex, int rowIndex) {
 		colIndex += inRow.getMarginLeftPercent();
-		mainLayout.addComponent(inRow.getFieldLabel(), colIndex, rowIndex, colIndex + LABEL_CONSTANT_COLS, rowIndex);
+		mainLayout.addComponent(inRow.getFieldLabel(), colIndex, rowIndex, colIndex + labelWidth, rowIndex);
 		mainLayout.setComponentAlignment(inRow.getFieldLabel(), Alignment.MIDDLE_CENTER);
 		int fieldEndCols = colIndex + inRow.getWidthPercent() - 1;
-		int fieldMargin = colIndex + LABEL_CONSTANT_COLS + 1;
+		int fieldMargin = colIndex + labelWidth + 1;
 		mainLayout.addComponent(inRow.getField(), fieldMargin, rowIndex, fieldEndCols, rowIndex);
 		mainLayout.setColumnExpandRatio(colIndex, 1);
 	}
