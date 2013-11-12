@@ -33,7 +33,9 @@ public class MyVaadinUI extends UI
     @Override
     protected void init(VaadinRequest request) {
         final VerticalLayout layout = new VerticalLayout();
-
+		layout.setSizeFull();
+		Layout formTest = new PercentFormTest().getMainLayout();
+		layout.addComponent(formTest);
         layout.setMargin(true);
         setContent(layout);
 		layout.addComponent(new Label("Form Creator ShowCase"));
@@ -41,6 +43,8 @@ public class MyVaadinUI extends UI
 		for (FormCreator form: formsInShowcase) {
 			layout.addComponent(form.getMainLayout());
 		}
+
+
 		Button commitButton = new Button("Commit");
 		commitButton.addClickListener(new Button.ClickListener() {
 			@Override
@@ -51,16 +55,6 @@ public class MyVaadinUI extends UI
 			}
 		});
 		layout.addComponent(commitButton);
-
-		GridLayout gridLayout = new GridLayout(100,10);
-		gridLayout.setSizeFull();
-
-		gridLayout.addComponent(new TextArea(), 0, 0, 10, 0);
-		gridLayout.addComponent(new TextArea(), 11, 0, 50, 0);
-		gridLayout.addComponent(new TextArea(), 51, 0, 99, 0);
-
-
-		layout.addComponent(gridLayout);
 
 
     }
