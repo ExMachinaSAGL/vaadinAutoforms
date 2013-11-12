@@ -43,7 +43,7 @@ public class PercentGridRendered implements GridRender {
 	private void initMainLayout(LinkedList<LinkedList<FormComponent>> designedComponents) {
 		mainLayout = new GridLayout(100, designedComponents.size());
 		mainLayout.setSpacing(true);
-		mainLayout.setSizeFull();
+		mainLayout.setSizeUndefined();
 		mainLayout.setHeight(-1, Sizeable.Unit.PIXELS);
 	}
 
