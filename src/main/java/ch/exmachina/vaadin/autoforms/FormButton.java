@@ -9,7 +9,7 @@ public class FormButton implements FormComponent{
 
 	private final Button button;
 	private String buttonName;
-	private int widthPercent = 25;
+	private int widthPercent = 1;
 	private int marginLeftPercent = 0;
 
 	/**
