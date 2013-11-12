@@ -25,9 +25,14 @@ public abstract class FormCreator<T> {
 
 	private ValidationManager validationManager = new ValidationManager();
 
-	protected FormCreator() {
+	public FormCreator() {
 		initFields();
-		mainLayout = new FormGridRender(this).render();
+		mainLayout = new FormGridRender().render(this);
+	}
+
+	public FormCreator(GridRender gridRender) {
+		initFields();
+		mainLayout = gridRender.render(this);
 	}
 
 	protected final void initWithBean(T bean) {

@@ -5,25 +5,25 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import ch.exmachina.vaadin.autoforms.GridCellInfoBuilder.GridCellInfo;
+import com.vaadin.ui.Layout;
+
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * @autor Marco Manzi
  */
-public class FormGridRender {
+public class FormGridRender implements GridRender{
 	private GridLayout mainLayout;
 	private int gridColumnNum = 0;
 	HorizontalLayout buttonLayout;
 	private FormCreator formCreator;
 
-	FormGridRender(FormCreator formCreator) {
+	@Override
+	public Layout render(FormCreator formCreator) {
 		this.formCreator = formCreator;
 		initButtonLayout();
 		initMainLayout();
-	}
-
-	GridLayout render() {
 		return mainLayout;
 	}
 

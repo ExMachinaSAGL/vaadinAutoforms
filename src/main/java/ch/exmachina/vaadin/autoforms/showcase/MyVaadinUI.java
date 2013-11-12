@@ -51,6 +51,21 @@ public class MyVaadinUI extends UI
 			}
 		});
 		layout.addComponent(commitButton);
+
+		GridLayout gridLayout = new GridLayout(100,10);
+		gridLayout.setSizeFull();
+
+		gridLayout.addComponent(new TextArea(), 0, 0, 10, 0);
+		gridLayout.addComponent(new TextArea(), 11, 0, 50, 0);
+		gridLayout.addComponent(new TextArea(), 51, 0, 99, 0);
+
+
+		layout.addComponent(gridLayout);
+
+
     }
 
 }
+
+
+
