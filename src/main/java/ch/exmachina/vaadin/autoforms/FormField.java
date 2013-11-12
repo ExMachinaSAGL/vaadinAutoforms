@@ -20,7 +20,7 @@ public class FormField implements FormComponent {
 	private int marginLeftPercent = 0;
 	private LABEL_POSITION labelPosition = LABEL_POSITION.MIDDLE_LEFT;
 
-	enum LABEL_POSITION {
+	public enum LABEL_POSITION {
 		TOP_LEFT, MIDDLE_LEFT
 	}
 
