@@ -43,7 +43,7 @@ public class PercentGridDesignerTest {
 		LinkedList<LinkedList<FormComponent>> components = new LinkedList<LinkedList<FormComponent>>();
 		components.add(new LinkedList<FormComponent>() {
 			{
-				add(new  FormField("test", TextField.class, 100));
+				add(new  FormFieldBuilder("test", TextField.class).width(100).build());
 			}
 		});
 		LinkedList<LinkedList<FormComponent>> designedComponents = new PercentGridDesigner().addPercents(components);
@@ -69,8 +69,8 @@ public class PercentGridDesignerTest {
 		LinkedList<LinkedList<FormComponent>> components = new LinkedList<LinkedList<FormComponent>>();
 		components.add(new LinkedList<FormComponent>() {
 			{
-				add(new  FormField("test", TextField.class, 50, 20));
-				add(new  FormField("test2", TextField.class));
+				add(new  FormFieldBuilder("test", TextField.class).width(50).marginLeft(20).build());
+				add(new  FormFieldBuilder("test2", TextField.class).build());
 			}
 		});
 		LinkedList<LinkedList<FormComponent>> designedComponents = new PercentGridDesigner().addPercents(components);
@@ -83,10 +83,10 @@ public class PercentGridDesignerTest {
 		LinkedList<LinkedList<FormComponent>> components = new LinkedList<LinkedList<FormComponent>>();
 		components.add(new LinkedList<FormComponent>() {
 			{
-				add(new  FormField("test", TextField.class, 40));
-				add(new  FormField("test2", TextField.class));
-				add(new  FormField("test2", TextField.class, 10));
-				add(new  FormField("test2", TextField.class));
+				add(new  FormFieldBuilder("test", TextField.class).width(40).build());
+				add(new  FormFieldBuilder("test2", TextField.class).build());
+				add(new  FormFieldBuilder("test2", TextField.class).width(10).build());
+				add(new  FormFieldBuilder("test2", TextField.class).build());
 			}
 		});
 		LinkedList<LinkedList<FormComponent>> designedComponents = new PercentGridDesigner().addPercents(components);
@@ -101,10 +101,10 @@ public class PercentGridDesignerTest {
 		LinkedList<LinkedList<FormComponent>> components = new LinkedList<LinkedList<FormComponent>>();
 		components.add(new LinkedList<FormComponent>() {
 			{
-				add(new  FormField("test", TextField.class, 100));
-				add(new  FormField("test2", TextField.class));
-				add(new  FormField("test2", TextField.class, 10));
-				add(new  FormField("test2", TextField.class));
+				add(new  FormFieldBuilder("test", TextField.class).width(100).build());
+				add(new  FormFieldBuilder("test2", TextField.class).build());
+				add(new  FormFieldBuilder("test2", TextField.class).width(10).build());
+				add(new  FormFieldBuilder("test2", TextField.class).build());
 			}
 		});
 		new PercentGridDesigner().addPercents(components);

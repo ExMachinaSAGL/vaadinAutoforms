@@ -16,8 +16,13 @@ public class FormField implements FormComponent {
 	private boolean immediate = true;
 	private boolean useBinder = true;
 	private boolean readOnly = false;
-	private int widthPercent = -1;
-	private int marginLeftPercent = -1;
+	private int widthPercent = 0;
+	private int marginLeftPercent = 0;
+	private LABEL_POSITION labelPosition = LABEL_POSITION.MIDDLE_LEFT;
+
+	enum LABEL_POSITION {
+		TOP_LEFT, MIDDLE_LEFT
+	}
 
 	/**
 	 * Create a form field, with a field that is instance of fieldClass, with widthPercent you can set the width in row's width %
@@ -25,45 +30,16 @@ public class FormField implements FormComponent {
 	 *
 	 * @param fieldName
 	 * @param fieldClass
-	 * @param widthPercent
-	 * @param marginLeftPercent
-	 */
-	public FormField(String fieldName, Class<? extends AbstractField> fieldClass, int widthPercent, int marginLeftPercent) {
-		this(fieldName, (AbstractField) wrapNewInstantiation(fieldClass));
-		this.widthPercent = widthPercent;
-		this.marginLeftPercent = marginLeftPercent;
-	}
-
-	/**
-	 * Create a form field, with a field that is instance of fieldClass, position and width is automatically calculated on row
-	 *
-	 * @param fieldName
-	 * @param fieldClass
 	 */
 	public FormField(String fieldName, Class<? extends AbstractField> fieldClass) {
-		this(fieldName, fieldClass, 0, 0);
+		this(fieldName, (AbstractField) wrapNewInstantiation(fieldClass));
 	}
 
 	/**
-	 * Create a form field, with a field that is instance of fieldClass, with widthPercent you can set the width in row's width %.
-	 * The margin left will be zero
-	 *
+	 * Create a form field
 	 * @param fieldName
-	 * @param fieldClass
-	 * @param widthPercent
+	 * @param field
 	 */
-	public FormField(String fieldName, Class<? extends AbstractField> fieldClass, int widthPercent) {
-		this(fieldName, fieldClass, widthPercent, 0);
-	}
-
-	private static Object wrapNewInstantiation(Class<? extends AbstractField> fieldClass) {
-		try {
-			return fieldClass.newInstance();
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Wrong Class used for FormField" + fieldClass);
-		}
-	}
-
 	public FormField(String fieldName, AbstractField field) {
 		this.field = field;
 		field.setSizeFull();
@@ -74,6 +50,14 @@ public class FormField implements FormComponent {
 
 		if (field instanceof AbstractTextField) {
 			((AbstractTextField)field).setNullRepresentation("");
+		}
+	}
+
+	private static Object wrapNewInstantiation(Class<? extends AbstractField> fieldClass) {
+		try {
+			return fieldClass.newInstance();
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Wrong Class used for FormField" + fieldClass);
 		}
 	}
 
@@ -170,7 +154,19 @@ public class FormField implements FormComponent {
 		return marginLeftPercent;
 	}
 
+	public void setMarginLeftPercent(int marginLeftPercent) {
+		this.marginLeftPercent = marginLeftPercent;
+	}
+
 	public boolean hasAutomaticWidth() {
 		return widthPercent == 0;
+	}
+
+	public LABEL_POSITION getLabelPosition() {
+		return labelPosition;
+	}
+
+	public void setLabelPosition(LABEL_POSITION labelPosition) {
+		this.labelPosition = labelPosition;
 	}
 }

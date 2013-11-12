@@ -3,6 +3,7 @@ package ch.exmachina.vaadin.autoforms;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.VerticalLayout;
 
 import java.util.LinkedList;
 
@@ -22,7 +23,7 @@ public class PercentGridRendered implements GridRender {
 	}
 
 	public PercentGridRendered(int labelWidth) {
-		this.labelWidth = labelWidth > 0? labelWidth: LABEL_WIDTH_DEFAULT;
+		this.labelWidth = labelWidth > 0? labelWidth - 1: LABEL_WIDTH_DEFAULT;
 		designer = new PercentGridDesigner();
 	}
 
@@ -42,7 +43,6 @@ public class PercentGridRendered implements GridRender {
 	private void initMainLayout(LinkedList<LinkedList<FormComponent>> designedComponents) {
 		mainLayout = new GridLayout(100, designedComponents.size());
 		mainLayout.setSpacing(true);
-		mainLayout.setMargin(true);
 		mainLayout.setSizeFull();
 		mainLayout.setHeight(-1, Sizeable.Unit.PIXELS);
 	}
@@ -67,13 +67,33 @@ public class PercentGridRendered implements GridRender {
 	}
 
 	private void addFieldToRow(FormField inRow, int colIndex, int rowIndex) {
+		if (labelWidth >= inRow.getWidthPercent()) {
+			throw new IllegalStateException("Label width can't be greater than field");
+		}
+		switch (inRow.getLabelPosition()) {
+			case MIDDLE_LEFT: addFieldToRowWithLabelOnLeft(inRow, colIndex, rowIndex); break;
+			case TOP_LEFT: addFieldToRowWithTop(inRow, colIndex, rowIndex); break;
+		}
+	}
+
+	private void addFieldToRowWithLabelOnLeft(FormField inRow, int colIndex, int rowIndex) {
 		colIndex += inRow.getMarginLeftPercent();
 		mainLayout.addComponent(inRow.getFieldLabel(), colIndex, rowIndex, colIndex + labelWidth, rowIndex);
-		mainLayout.setComponentAlignment(inRow.getFieldLabel(), Alignment.MIDDLE_CENTER);
+		mainLayout.setComponentAlignment(inRow.getFieldLabel(), Alignment.MIDDLE_RIGHT);
 		int fieldEndCols = colIndex + inRow.getWidthPercent() - 1;
 		int fieldMargin = colIndex + labelWidth + 1;
 		mainLayout.addComponent(inRow.getField(), fieldMargin, rowIndex, fieldEndCols, rowIndex);
 		mainLayout.setColumnExpandRatio(colIndex, 1);
+	}
+
+	private void addFieldToRowWithTop(FormField inRow, int colIndex, int rowIndex) {
+		colIndex += inRow.getMarginLeftPercent();
+		int fieldEndCols = colIndex + inRow.getWidthPercent() - 1;
+		VerticalLayout fieldContainer = new VerticalLayout();
+		fieldContainer.addComponent(inRow.getFieldLabel());
+		fieldContainer.setComponentAlignment(inRow.getFieldLabel(), Alignment.MIDDLE_LEFT);
+		fieldContainer.addComponent(inRow.getField());
+		mainLayout.addComponent(fieldContainer, colIndex, rowIndex, fieldEndCols, rowIndex);
 	}
 
 
