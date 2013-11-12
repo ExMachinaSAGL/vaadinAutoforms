@@ -26,8 +26,7 @@ public abstract class FormCreator<T> {
 	private ValidationManager validationManager = new ValidationManager();
 
 	public FormCreator() {
-		initFields();
-		mainLayout = new FormGridRender().render(this);
+		this (new FormGridRender());
 	}
 
 	public FormCreator(GridRender gridRender) {
