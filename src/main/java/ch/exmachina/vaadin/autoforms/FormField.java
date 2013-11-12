@@ -47,7 +47,6 @@ public class FormField implements FormComponent {
 		this.fieldName = fieldName;
 		fieldLabel = new Label(this.fieldName, ContentMode.HTML);
 		fieldLabel.setSizeUndefined();
-
 		if (field instanceof AbstractTextField) {
 			((AbstractTextField)field).setNullRepresentation("");
 		}
