@@ -21,8 +21,8 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test", TextField.class).width(100).build());
 			}
 		});
-		testFieldLabel(created, "test", 0, 15);
-		testField(created, 15, 100);
+		testFieldLabel(created, "test", 0, 1);
+		testField(created, 1, 100);
 	}
 
 	@Test
@@ -52,10 +52,10 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test2", TextField.class).width(50).build());
 			}
 		});
-		testFieldLabel(created, "test1", 0, 15);
-		testField(created, 15, 50);
-		testFieldLabel(created, "test2", 50, 65);
-		testField(created, 65, 99);
+		testFieldLabel(created, "test1", 0, 1);
+		testField(created, 1, 50);
+		testFieldLabel(created, "test2", 50, 51);
+		testField(created, 51, 99);
 	}
 
 	@Test
@@ -65,8 +65,8 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test", TextField.class).build());
 			}
 		});
-		testFieldLabel(created, "test", 0, 15);
-		testField(created, 15, 100);
+		testFieldLabel(created, "test", 0, 1);
+		testField(created, 1, 100);
 	}
 
 
@@ -78,10 +78,10 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test2", TextField.class).build());
 			}
 		});
-		testFieldLabel(created, "test1", 0, 15);
-		testField(created, 15, 50);
-		testFieldLabel(created, "test2", 50, 65);
-		testField(created, 65, 100);
+		testFieldLabel(created, "test1", 0, 1);
+		testField(created, 1, 50);
+		testFieldLabel(created, "test2", 50, 51);
+		testField(created, 51, 100);
 	}
 
 	@Test
@@ -91,8 +91,8 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test1", TextField.class).width(50).marginLeft(30).build());
 			}
 		});
-		testFieldLabel(created, "test1", 30, 45);
-		testField(created, 45, 80);
+		testFieldLabel(created, "test1", 30, 31);
+		testField(created, 31, 80);
 	}
 
 	@Test
@@ -104,11 +104,11 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test2", TextField.class).build());
 			}
 		});
-		testFieldLabel(created, "test1", 10, 25);
-		testField(created, 25, 40);
+		testFieldLabel(created, "test1", 10, 11);
+		testField(created, 11, 40);
 		testButton(created, "testButton", 50, 75);
-		testFieldLabel(created, "test2", 75, 90);
-		testField(created, 90, 100);
+		testFieldLabel(created, "test2", 75, 76);
+		testField(created, 76, 100);
 	}
 
 	@Test
@@ -119,10 +119,10 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test2", TextField.class).width(20).build());
 			}
 		});
-		testFieldLabel(created, "test1", 30, 45);
-		testField(created, 45, 80);
-		testFieldLabel(created,	"test2", 90, 95);
-		testField(created, 95, 100);
+		testFieldLabel(created, "test1", 30, 31);
+		testField(created, 31, 80);
+		testFieldLabel(created,	"test2", 89, 81);
+		testField(created, 81, 100);
 	}
 
 	@Test
@@ -133,29 +133,11 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test2", TextField.class).build());
 			}
 		});
-		testFieldLabel(created, "test1", 30, 45);
-		testField(created, 45, 80);
-		testFieldLabel(created,	"test2", 90, 95);
-		testField(created, 95, 100);
+		testFieldLabel(created, "test1", 30, 31);
+		testField(created, 31, 80);
+		testFieldLabel(created,	"test2", 80, 81);
+		testField(created, 81, 100);
 	}
-
-	@Test
-	public void testLabelWidth() {
-
-		FormCreator formCreator = new FormCreator(new PercentGridRendered(3)) {
-			@Override
-			protected void beforeRendering() {}
-
-			@Override
-			protected void initFields() {
-				addRow(new FormFieldBuilder("test1", TextField.class).width(10).build());
-			}
-		};
-		GridLayout created = new PercentGridRendered(3).render(formCreator);
-		testFieldLabel(created, "test1", 0, 3);
-		testField(created, 3, 10);
-	}
-
 
 	private GridLayout testPercentGridRendererForFormWithField(ArrayList<FormComponent> fields) {
 		FormCreator formCreator = createTestForm(fields);

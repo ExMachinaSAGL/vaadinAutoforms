@@ -12,18 +12,13 @@ import java.util.LinkedList;
  */
 public class PercentGridRendered implements GridRender {
 	private GridLayout mainLayout;
-	private int labelWidth = 14;
-	private static final int LABEL_WIDTH_DEFAULT = 14;
+	private static final int LABEL_WIDTH_DEFAULT = 0;
+
 
 	private PercentGridDesigner designer;
 	private FormCreator formCreator;
 
 	public PercentGridRendered() {
-		this(0);
-	}
-
-	public PercentGridRendered(int labelWidth) {
-		this.labelWidth = labelWidth > 0? labelWidth - 1: LABEL_WIDTH_DEFAULT;
 		designer = new PercentGridDesigner();
 	}
 
@@ -67,7 +62,7 @@ public class PercentGridRendered implements GridRender {
 	}
 
 	private void addFieldToRow(FormField inRow, int colIndex, int rowIndex) {
-		if (labelWidth >= inRow.getWidthPercent()) {
+		if (LABEL_WIDTH_DEFAULT >= inRow.getWidthPercent()) {
 			throw new IllegalStateException("Label width can't be greater than field");
 		}
 		switch (inRow.getLabelPosition()) {
@@ -78,10 +73,10 @@ public class PercentGridRendered implements GridRender {
 
 	private void addFieldToRowWithLabelOnLeft(FormField inRow, int colIndex, int rowIndex) {
 		colIndex += inRow.getMarginLeftPercent();
-		mainLayout.addComponent(inRow.getFieldLabel(), colIndex, rowIndex, colIndex + labelWidth, rowIndex);
+		mainLayout.addComponent(inRow.getFieldLabel(), colIndex, rowIndex, colIndex + LABEL_WIDTH_DEFAULT, rowIndex);
 		mainLayout.setComponentAlignment(inRow.getFieldLabel(), Alignment.MIDDLE_RIGHT);
 		int fieldEndCols = colIndex + inRow.getWidthPercent() - 1;
-		int fieldMargin = colIndex + labelWidth + 1;
+		int fieldMargin = colIndex + LABEL_WIDTH_DEFAULT + 1;
 		mainLayout.addComponent(inRow.getField(), fieldMargin, rowIndex, fieldEndCols, rowIndex);
 		inRow.getField().setSizeFull();
 		for (int i = fieldMargin; i <= fieldEndCols; i++) {
