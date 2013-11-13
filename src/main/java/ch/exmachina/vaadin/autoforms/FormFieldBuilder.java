@@ -1,6 +1,8 @@
 package ch.exmachina.vaadin.autoforms;
 
+import com.vaadin.data.Container;
 import com.vaadin.ui.AbstractField;
+import com.vaadin.ui.AbstractSelect;
 
 /**
  * @autor Marco Manzi
@@ -8,8 +10,20 @@ import com.vaadin.ui.AbstractField;
 public class FormFieldBuilder {
 	private FormField formField;
 
+	public FormFieldBuilder(String fieldName, AbstractField field) {
+		formField = new FormField(fieldName, field);
+	}
+
 	public FormFieldBuilder(String fieldName, Class<? extends AbstractField> fieldClass) {
 		formField = new FormField(fieldName, fieldClass);
+	}
+
+	public FormFieldBuilder(String fieldName, Class<? extends AbstractSelect> field, Container container) {
+		formField = new FormField(fieldName, field, container);
+	}
+
+	public FormFieldBuilder(String fieldName, AbstractSelect field, Container container) {
+		formField = new FormField(fieldName, field, container);
 	}
 
 	public FormFieldBuilder width(int width) {

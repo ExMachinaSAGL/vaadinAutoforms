@@ -13,13 +13,25 @@ import java.util.LinkedList;
 public class PercentGridRendered implements GridRender {
 	private GridLayout mainLayout;
 	private static final int LABEL_WIDTH_DEFAULT = 0;
-	static final int GRID_COL_WIDTH = 100;
+	static int GRID_COL_WIDTH = 100;
 
 
 	private PercentGridDesigner designer;
 	private FormCreator formCreator;
 
+
 	public PercentGridRendered() {
+		this(GRID_COL_WIDTH);
+	}
+
+	/**
+	 * The parameter in input will decide the max number of rows for grid,
+	 * the sum of all components widths can't be greater than this.
+	 * Reduce this parameter to reduce grid min Width when resizing the window
+	 * @param numberOfMaxPercent
+	 */
+	public PercentGridRendered(int numberOfMaxPercent) {
+		GRID_COL_WIDTH = numberOfMaxPercent;
 		designer = new PercentGridDesigner();
 	}
 
