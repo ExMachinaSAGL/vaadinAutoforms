@@ -38,25 +38,6 @@ public class MyVaadinUI extends UI
 		layout.addComponent(formTest);
         layout.setMargin(true);
         setContent(layout);
-		layout.addComponent(new Label("Form Creator ShowCase"));
-
-		for (FormCreator form: formsInShowcase) {
-			layout.addComponent(form.getMainLayout());
-		}
-
-
-		Button commitButton = new Button("Commit");
-		commitButton.addClickListener(new Button.ClickListener() {
-			@Override
-			public void buttonClick(Button.ClickEvent event) {
-				for (FormCreator form: formsInShowcase) {
-					form.commit();
-				}
-			}
-		});
-		layout.addComponent(commitButton);
-
-
     }
 
 }

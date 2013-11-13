@@ -29,8 +29,9 @@ class PercentGridDesigner {
 		for (FormComponent formComponent: rowComponents) {
 			int percentForEachComponent = evaluatePercentForEachComponent(percentAlreadyBusyFromOtherComponents,
 					numberOfComponentsWithoutInfo);
-			if (formComponent.hasAutomaticWidth()) {
-				formComponent.setWidthPercent(percentForEachComponent);
+			if ((formComponent instanceof FormField) &&
+					formComponent.hasAutomaticWidth()) {
+				((FormField)formComponent).setWidthPercent(percentForEachComponent);
 			}
 		}
 	}

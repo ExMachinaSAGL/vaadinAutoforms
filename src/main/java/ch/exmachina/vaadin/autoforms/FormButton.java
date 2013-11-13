@@ -9,7 +9,7 @@ public class FormButton implements FormComponent{
 
 	private final Button button;
 	private String buttonName;
-	private int widthPercent = 1;
+	private int widthPercent = 2;
 	private int marginLeftPercent = 0;
 
 	/**
@@ -49,11 +49,6 @@ public class FormButton implements FormComponent{
 	@Override
 	public int getWidthPercent() {
 		return this.widthPercent;
-	}
-
-	@Override
-	public void setWidthPercent(int widthPercent) {
-		this.widthPercent = widthPercent;
 	}
 
 	@Override

@@ -1,9 +1,6 @@
 package ch.exmachina.vaadin.autoforms.showcase;
 
-import ch.exmachina.vaadin.autoforms.FormCreator;
-import ch.exmachina.vaadin.autoforms.FormField;
-import ch.exmachina.vaadin.autoforms.FormFieldBuilder;
-import ch.exmachina.vaadin.autoforms.PercentGridRendered;
+import ch.exmachina.vaadin.autoforms.*;
 import com.vaadin.ui.TextField;
 
 /**
@@ -23,10 +20,10 @@ public class PercentFormTest extends FormCreator<TestModel> {
 
 	@Override
 	protected void initFields() {
-		FormField test = new FormFieldBuilder("surname", TextField.class).width(5).build();
-	  	addRow(new FormFieldBuilder("name", TextField.class).width(2).build(),
+		FormField test = new FormFieldBuilder("surname", TextField.class).build();
+	  	addRow(new FormFieldBuilder("name", TextField.class).width(50).build(),
 				test,
-		new FormFieldBuilder("itWork", TextField.class).width(3).build()
-		);
+				new FormFieldBuilder("itWork", TextField.class).build());
+		addRow(new FormButton("Test of button with long string", null));
 	}
 }

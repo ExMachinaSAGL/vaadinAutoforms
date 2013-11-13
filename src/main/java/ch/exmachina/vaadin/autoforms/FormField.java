@@ -144,7 +144,6 @@ public class FormField implements FormComponent {
 		return widthPercent;
 	}
 
-	@Override
 	public void setWidthPercent(int widthPercent) {
 		this.widthPercent = widthPercent;
 	}

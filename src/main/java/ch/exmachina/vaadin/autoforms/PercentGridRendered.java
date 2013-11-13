@@ -71,7 +71,7 @@ public class PercentGridRendered implements GridRender {
 		colIndex += inRow.getMarginLeftPercent();
 		int fieldEndCols = colIndex + inRow.getWidthPercent() - 1;
 		mainLayout.addComponent(inRow.getButton(), colIndex, rowIndex, fieldEndCols, rowIndex);
-		mainLayout.setColumnExpandRatio(colIndex, 1);
+		mainLayout.setColumnExpandRatio(fieldEndCols, 1);
 	}
 
 	private void addFieldToRow(FormField inRow, int colIndex, int rowIndex) {
@@ -92,10 +92,6 @@ public class PercentGridRendered implements GridRender {
 		int fieldMargin = colIndex + LABEL_WIDTH_DEFAULT + 1;
 		mainLayout.addComponent(inRow.getField(), fieldMargin, rowIndex, fieldEndCols, rowIndex);
 		inRow.getField().setSizeFull();
-		for (int i = fieldMargin; i <= fieldEndCols; i++) {
-			mainLayout.setColumnExpandRatio(i, 1);
-		}
-
 	}
 
 	private void addFieldToRowWithTop(FormField inRow, int colIndex, int rowIndex) {
@@ -107,9 +103,6 @@ public class PercentGridRendered implements GridRender {
 		fieldContainer.addComponent(inRow.getField());
 		mainLayout.addComponent(fieldContainer, colIndex, rowIndex, fieldEndCols, rowIndex);
 		inRow.getField().setSizeFull();
-		for (int i = colIndex; i <= fieldEndCols; i++) {
-			mainLayout.setColumnExpandRatio(i, 1);
-		}
 	}
 
 
