@@ -13,6 +13,7 @@ import java.util.LinkedList;
 public class PercentGridRendered implements GridRender {
 	private GridLayout mainLayout;
 	private static final int LABEL_WIDTH_DEFAULT = 0;
+	static final int GRID_COL_WIDTH = 100;
 
 
 	private PercentGridDesigner designer;
@@ -36,7 +37,7 @@ public class PercentGridRendered implements GridRender {
 	}
 
 	private void initMainLayout(LinkedList<LinkedList<FormComponent>> designedComponents) {
-		mainLayout = new GridLayout(100, designedComponents.size());
+		mainLayout = new GridLayout(GRID_COL_WIDTH, designedComponents.size());
 		mainLayout.setSpacing(true);
 		mainLayout.setSizeFull();
 		mainLayout.setHeight(-1, Sizeable.Unit.PIXELS);

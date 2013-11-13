@@ -23,10 +23,10 @@ public class PercentFormTest extends FormCreator<TestModel> {
 
 	@Override
 	protected void initFields() {
-		FormField test = new FormFieldBuilder("surname", TextField.class).width(25).build();
-	  	addRow(new FormFieldBuilder("name", TextField.class).build(),
+		FormField test = new FormFieldBuilder("surname", TextField.class).width(5).build();
+	  	addRow(new FormFieldBuilder("name", TextField.class).width(2).build(),
 				test,
-		new FormFieldBuilder("itWork", TextField.class).build()
+		new FormFieldBuilder("itWork", TextField.class).width(3).build()
 		);
 	}
 }

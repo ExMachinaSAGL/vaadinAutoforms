@@ -25,7 +25,7 @@ class PercentGridDesigner {
 	private void addPercentOnRow(LinkedList<FormComponent> rowComponents) {
 		int numberOfComponentsWithoutInfo = evaluateComponentsWithoutInfoFrom(rowComponents);
 		int percentAlreadyBusyFromOtherComponents = evaluateComponentsTotalPercentFrom(rowComponents);
-		if (percentAlreadyBusyFromOtherComponents > 100) throw new IllegalStateException("All Members of a row can have a total width of 100");
+		if (percentAlreadyBusyFromOtherComponents > PercentGridRendered.GRID_COL_WIDTH) throw new IllegalStateException("All Members of a row can have a total width of 100");
 		for (FormComponent formComponent: rowComponents) {
 			int percentForEachComponent = evaluatePercentForEachComponent(percentAlreadyBusyFromOtherComponents,
 					numberOfComponentsWithoutInfo);
@@ -37,7 +37,7 @@ class PercentGridDesigner {
 
 	private int evaluatePercentForEachComponent(int percentAlreadyBusy, int numberOfAutomaticComponent) {
 		if (numberOfAutomaticComponent > 0) {
-			return (100 - percentAlreadyBusy) / numberOfAutomaticComponent;
+			return (PercentGridRendered.GRID_COL_WIDTH - percentAlreadyBusy) / numberOfAutomaticComponent;
 		}
 		return 0;
 	}
