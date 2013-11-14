@@ -56,6 +56,9 @@ public class FormLabel implements FormComponent {
 	}
 
 	@Override
+	public void setWidthPercent(int widthPercent) {}
+
+	@Override
 	public int getMarginLeftPercent() {
 		return this.marginLeftPercent;
 	}

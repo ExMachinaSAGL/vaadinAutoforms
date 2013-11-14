@@ -212,13 +212,13 @@ public abstract class FormCreator<T> {
 	}
 
 	public FormButton getButton(String buttonName) {
-		if (buttonsOfForm.containsKey(buttonName))
-			return buttonsOfForm.get(buttonName);
 		for (FormButton button : buttons) {
 			if (button.getButtonName().equals(buttonName)) {
 				return button;
 			}
 		}
+		if (buttonsOfForm.containsKey(buttonName))
+			return buttonsOfForm.get(buttonName);
 		return null;
 	}
 

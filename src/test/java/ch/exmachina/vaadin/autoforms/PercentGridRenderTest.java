@@ -1,7 +1,6 @@
 package ch.exmachina.vaadin.autoforms;
 
 import com.vaadin.ui.*;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class PercentGridRenderTest {
 			{
 				add(new FormFieldBuilder("test", TextField.class).width(100).build());
 			}
-		});
+		}, 100);
 		testFieldLabel(created, "test", 0, 1);
 		testField(created, 1, 100);
 	}
@@ -32,7 +31,7 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test", TextField.class).width(100).
 						labelPosition(FormField.LABEL_POSITION.TOP_LEFT).build());
 			}
-		});
+		}, 100);
 		for (int i = 0; i < 100; i++) {
 			Component inGrid = created.getComponent(i, 0);
 			assertTrue("Problem with label on index:" + i, inGrid instanceof VerticalLayout);
@@ -51,7 +50,7 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test1", TextField.class).width(50).build());
 				add(new FormFieldBuilder("test2", TextField.class).width(50).build());
 			}
-		});
+		}, 100);
 		testFieldLabel(created, "test1", 0, 1);
 		testField(created, 1, 50);
 		testFieldLabel(created, "test2", 50, 51);
@@ -64,7 +63,7 @@ public class PercentGridRenderTest {
 			{
 				add(new FormFieldBuilder("test", TextField.class).build());
 			}
-		});
+		}, 100);
 		testFieldLabel(created, "test", 0, 1);
 		testField(created, 1, 100);
 	}
@@ -77,7 +76,7 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test1", TextField.class).build());
 				add(new FormFieldBuilder("test2", TextField.class).build());
 			}
-		});
+		}, 100);
 		testFieldLabel(created, "test1", 0, 1);
 		testField(created, 1, 50);
 		testFieldLabel(created, "test2", 50, 51);
@@ -90,7 +89,7 @@ public class PercentGridRenderTest {
 			{
 				add(new FormFieldBuilder("test1", TextField.class).width(50).marginLeft(30).build());
 			}
-		});
+		}, 100);
 		testFieldLabel(created, "test1", 30, 31);
 		testField(created, 31, 80);
 	}
@@ -100,15 +99,15 @@ public class PercentGridRenderTest {
 		GridLayout created = testPercentGridRendererForFormWithField(new ArrayList() {
 			{
 				add(new FormFieldBuilder("test1", TextField.class).width(30).marginLeft(10).build());
-				add(new FormButton("testButton", null, 10));
+				add(new FormButton("testButton", null));
 				add(new FormFieldBuilder("test2", TextField.class).build());
 			}
-		});
+		}, 100);
 		testFieldLabel(created, "test1", 10, 11);
 		testField(created, 11, 40);
-		testButton(created, "testButton", 50, 53);
-		testFieldLabel(created, "test2", 53, 54);
-		testField(created, 54, 100);
+		testButton(created, "testButton", 40, 70);
+		testFieldLabel(created, "test2", 70, 71);
+		testField(created, 71, 100);
 	}
 
 	@Test
@@ -118,7 +117,7 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test1", TextField.class).width(50).marginLeft(30).build());
 				add(new FormFieldBuilder("test2", TextField.class).width(20).build());
 			}
-		});
+		}, 100);
 		testFieldLabel(created, "test1", 30, 31);
 		testField(created, 31, 80);
 		testFieldLabel(created,	"test2", 80, 81);
@@ -132,7 +131,7 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test1", TextField.class).width(50).marginLeft(30).build());
 				add(new FormFieldBuilder("test2", TextField.class).build());
 			}
-		});
+		}, 100);
 		testFieldLabel(created, "test1", 30, 31);
 		testField(created, 31, 80);
 		testFieldLabel(created,	"test2", 80, 81);
@@ -145,7 +144,7 @@ public class PercentGridRenderTest {
 			{
 				add(new FormFieldBuilder("test1", TextField.class).build());
 			}
-		});
+		}, 100);
 		assertEquals("Problem with label expand Ratio", 0, created.getColumnExpandRatio(0), 0);
 		for (int i = 1; i < 99; i++)
 			assertEquals("Problem with field expand Ratio", 1, created.getColumnExpandRatio(i), 0);
@@ -158,7 +157,7 @@ public class PercentGridRenderTest {
 				add(new FormFieldBuilder("test1", TextField.class).build());
 				add(new FormFieldBuilder("test2", TextField.class).build());
 			}
-		});
+		}, 100);
 		assertEquals("Problem with label expand Ratio", 0, created.getColumnExpandRatio(0), 0);
 		assertEquals("Problem with label expand Ratio", 0, created.getColumnExpandRatio(50), 0);
 		for (int i = 1; i < 49; i++)
@@ -167,13 +166,30 @@ public class PercentGridRenderTest {
 			assertEquals("Problem with field expand Ratio", 1, created.getColumnExpandRatio(i), 0);
 	}
 
-	private GridLayout testPercentGridRendererForFormWithField(ArrayList<FormComponent> fields) {
-		FormCreator formCreator = createTestForm(fields);
-		return new PercentGridRendered().render(formCreator);
+	@Test
+	public void testDesignerRenderIntegrationForDifferentColumns() {
+		GridLayout created = testPercentGridRendererForFormWithField(new ArrayList<FormComponent>() {
+			{
+				add(new FormFieldBuilder("test1", TextField.class).build());
+				add(new FormFieldBuilder("test2", TextField.class).width(13).build());
+				add(new FormButtonBuilder("button", null).width(3).build());
+			}
+		}, 30);
+		testFieldLabel(created, "test1", 0, 1);
+		testField(created, 1, 14);
+		testFieldLabel(created, "test2", 14, 15);
+		testField(created, 15, 27);
+		testButton(created, "button", 27, 30);
+
 	}
 
-	private FormCreator createTestForm(final List<FormComponent> testFields) {
-		return new FormCreator(new PercentGridRendered()) {
+	private GridLayout testPercentGridRendererForFormWithField(ArrayList<FormComponent> fields, int numColumns) {
+		FormCreator formCreator = createTestForm(fields, numColumns);
+		return new PercentGridRendered(numColumns).render(formCreator);
+	}
+
+	private FormCreator createTestForm(final List<FormComponent> testFields, int numColumns) {
+		return new FormCreator(new PercentGridRendered(numColumns)) {
 			@Override
 			protected void beforeRendering() {}
 

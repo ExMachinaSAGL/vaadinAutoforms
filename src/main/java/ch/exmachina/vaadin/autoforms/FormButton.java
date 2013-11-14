@@ -7,10 +7,10 @@ import com.vaadin.ui.Button;
  */
 public class FormButton implements FormComponent{
 
-	public static final int BUTTON_WIDTH_DEFAULT = 3;
 	private final Button button;
 	private String buttonName;
 	private int marginLeftPercent = 0;
+	private int widthPercent = 0;
 
 	/**
 	 * Create a button for form, it need a click listener attached
@@ -22,17 +22,6 @@ public class FormButton implements FormComponent{
 		this.button = new Button(this.buttonName);
 		if (clickListener != null)
 			button.addClickListener(clickListener);
-	}
-
-	/**
-	 * Create a button for form, it need a click listener attached, you can add a margin on left
-	 * @param buttonName
-	 * @param clickListener
-	 * @param marginLeftPercent
-	 */
-	public FormButton(String buttonName, Button.ClickListener clickListener, int marginLeftPercent) {
-		this(buttonName, clickListener);
-		this.marginLeftPercent = marginLeftPercent;
 	}
 
 	@Override
@@ -48,7 +37,12 @@ public class FormButton implements FormComponent{
 
 	@Override
 	public int getWidthPercent() {
-		return BUTTON_WIDTH_DEFAULT;
+		return widthPercent;
+	}
+
+	@Override
+	public void setWidthPercent(int widthPercent) {
+		this.widthPercent = widthPercent;
 	}
 
 	@Override
@@ -63,7 +57,7 @@ public class FormButton implements FormComponent{
 
 	@Override
 	public boolean hasAutomaticWidth() {
-		return false;
+		return widthPercent == 0;
 	}
 
 	public Button getButton() {

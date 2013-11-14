@@ -29,9 +29,8 @@ class PercentGridDesigner {
 		for (FormComponent formComponent: rowComponents) {
 			int percentForEachComponent = evaluatePercentForEachComponent(percentAlreadyBusyFromOtherComponents,
 					numberOfComponentsWithoutInfo);
-			if ((formComponent instanceof FormField) &&
-					formComponent.hasAutomaticWidth()) {
-				((FormField)formComponent).setWidthPercent(percentForEachComponent);
+			if (formComponent.hasAutomaticWidth()) {
+				formComponent.setWidthPercent(percentForEachComponent);
 			}
 		}
 	}
@@ -46,9 +45,9 @@ class PercentGridDesigner {
 	private int evaluateComponentsTotalPercentFrom(LinkedList<FormComponent> rowComponents) {
 		int result = 0;
 		for (FormComponent formComponent: rowComponents) {
-			if (!formComponent.hasAutomaticWidth()) {
-				result += formComponent.getWidthPercent() + formComponent.getMarginLeftPercent();
-			}
+//			if (!formComponent.hasAutomaticWidth()) {
+			result += formComponent.getWidthPercent() + formComponent.getMarginLeftPercent();
+//			}
 		}
 		return result;
 	}
