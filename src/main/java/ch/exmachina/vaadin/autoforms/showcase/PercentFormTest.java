@@ -13,10 +13,7 @@ public class PercentFormTest extends FormCreator<TestModel> {
 	}
 
 	@Override
-	protected void beforeRendering() {
-
-
-	}
+	protected void beforeRendering() {}
 
 	@Override
 	protected void initFields() {
