@@ -34,8 +34,8 @@ public class PercentGridDesignerTest {
 			}
 		});
 		LinkedList<LinkedList<FormComponent>> designedComponents = new PercentGridDesigner().addPercents(components);
-		Assert.assertEquals(98, designedComponents.get(0).get(0).getWidthPercent());
-		Assert.assertEquals(2, designedComponents.get(0).get(1).getWidthPercent());
+		Assert.assertEquals(97, designedComponents.get(0).get(0).getWidthPercent());
+		Assert.assertEquals(3, designedComponents.get(0).get(1).getWidthPercent());
 	}
 
 	@Test

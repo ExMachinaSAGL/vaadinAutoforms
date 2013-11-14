@@ -106,9 +106,9 @@ public class PercentGridRenderTest {
 		});
 		testFieldLabel(created, "test1", 10, 11);
 		testField(created, 11, 40);
-		testButton(created, "testButton", 50, 52);
-		testFieldLabel(created, "test2", 52, 53);
-		testField(created, 53, 100);
+		testButton(created, "testButton", 50, 53);
+		testFieldLabel(created, "test2", 53, 54);
+		testField(created, 54, 100);
 	}
 
 	@Test
@@ -121,7 +121,7 @@ public class PercentGridRenderTest {
 		});
 		testFieldLabel(created, "test1", 30, 31);
 		testField(created, 31, 80);
-		testFieldLabel(created,	"test2", 89, 81);
+		testFieldLabel(created,	"test2", 80, 81);
 		testField(created, 81, 100);
 	}
 

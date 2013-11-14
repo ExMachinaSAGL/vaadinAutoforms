@@ -1,24 +1,24 @@
 package ch.exmachina.vaadin.autoforms;
 
+import com.sun.tools.javac.util.List;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  * @autor Marco Manzi
  */
 public class PercentGridRendered implements GridRender {
 	private GridLayout mainLayout;
-	private static final int LABEL_WIDTH_DEFAULT = 0;
 	static int GRID_COL_WIDTH = 100;
-
-
 	private PercentGridDesigner designer;
 	private FormCreator formCreator;
-
+	private Set<Integer> colsWithLabel;
 
 	public PercentGridRendered() {
 		this(GRID_COL_WIDTH);
@@ -60,6 +60,7 @@ public class PercentGridRendered implements GridRender {
 		for (FormComponent inRow: rowComponents) {
 			inRow.setupForForm(formCreator);
 			switch (inRow.getType()) {
+				case LABEL: addLabelToRow((FormLabel) inRow, colIndex, rowIndex); break;
 				case FIELD: addFieldToRow((FormField) inRow, colIndex, rowIndex); break;
 				case BUTTON: addButtonToRow((FormButton)inRow, colIndex, rowIndex); break;
 			}
@@ -67,17 +68,21 @@ public class PercentGridRendered implements GridRender {
 		}
 	}
 
+	private void addLabelToRow(FormLabel inRow, int colIndex, int rowIndex) {
+		colIndex += inRow.getMarginLeftPercent();
+		mainLayout.addComponent(inRow.getLabel(), colIndex, rowIndex, colIndex +inRow.getWidthPercent() - 1, rowIndex);
+		mainLayout.setComponentAlignment(inRow.getLabel(), Alignment.MIDDLE_RIGHT);
+	}
+
 	private void addButtonToRow(FormButton inRow, int colIndex, int rowIndex) {
 		colIndex += inRow.getMarginLeftPercent();
 		int fieldEndCols = colIndex + inRow.getWidthPercent() - 1;
+		HorizontalLayout buttonContainer = new HorizontalLayout();
+		buttonContainer.addComponent(inRow.getButton());
 		mainLayout.addComponent(inRow.getButton(), colIndex, rowIndex, fieldEndCols, rowIndex);
-		mainLayout.setColumnExpandRatio(fieldEndCols, 1);
 	}
 
 	private void addFieldToRow(FormField inRow, int colIndex, int rowIndex) {
-		if (LABEL_WIDTH_DEFAULT >= inRow.getWidthPercent()) {
-			throw new IllegalStateException("Label width can't be greater than field");
-		}
 		switch (inRow.getLabelPosition()) {
 			case MIDDLE_LEFT: addFieldToRowWithLabelOnLeft(inRow, colIndex, rowIndex); break;
 			case TOP_LEFT: addFieldToRowWithTop(inRow, colIndex, rowIndex); break;
@@ -86,10 +91,9 @@ public class PercentGridRendered implements GridRender {
 
 	private void addFieldToRowWithLabelOnLeft(FormField inRow, int colIndex, int rowIndex) {
 		colIndex += inRow.getMarginLeftPercent();
-		mainLayout.addComponent(inRow.getFieldLabel(), colIndex, rowIndex, colIndex + LABEL_WIDTH_DEFAULT, rowIndex);
-		mainLayout.setComponentAlignment(inRow.getFieldLabel(), Alignment.MIDDLE_RIGHT);
+		addLabelToRow(new FormLabel(inRow.getFieldLabel()), colIndex, rowIndex);
 		int fieldEndCols = colIndex + inRow.getWidthPercent() - 1;
-		int fieldMargin = colIndex + LABEL_WIDTH_DEFAULT + 1;
+		int fieldMargin = colIndex +FormLabel.LABEL_WIDTH_DEFAULT;
 		mainLayout.addComponent(inRow.getField(), fieldMargin, rowIndex, fieldEndCols, rowIndex);
 		inRow.getField().setSizeFull();
 	}

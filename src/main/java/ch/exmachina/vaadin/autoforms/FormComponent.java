@@ -8,5 +8,6 @@ public interface FormComponent {
 	FormType getType();
 	int getWidthPercent();
 	int getMarginLeftPercent();
+	void setMarginLeftPercent(int marginLeftPercent);
 	boolean hasAutomaticWidth();
 }

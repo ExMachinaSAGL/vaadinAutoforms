@@ -7,9 +7,9 @@ import com.vaadin.ui.Button;
  */
 public class FormButton implements FormComponent{
 
+	public static final int BUTTON_WIDTH_DEFAULT = 3;
 	private final Button button;
 	private String buttonName;
-	private int widthPercent = 2;
 	private int marginLeftPercent = 0;
 
 	/**
@@ -48,7 +48,7 @@ public class FormButton implements FormComponent{
 
 	@Override
 	public int getWidthPercent() {
-		return this.widthPercent;
+		return BUTTON_WIDTH_DEFAULT;
 	}
 
 	@Override
@@ -57,8 +57,13 @@ public class FormButton implements FormComponent{
 	}
 
 	@Override
+	public void setMarginLeftPercent(int marginLeftPercent) {
+		this.marginLeftPercent = marginLeftPercent;
+	}
+
+	@Override
 	public boolean hasAutomaticWidth() {
-		return this.widthPercent == 0;
+		return false;
 	}
 
 	public Button getButton() {
