@@ -18,6 +18,7 @@ public abstract class FormCreator<T> {
 	private Layout mainLayout;
 
 	private Map<String, FormField> fieldsOfForm = new HashMap<String, FormField>();
+	private Map<String, FormButton> buttonsOfForm = new HashMap<String, FormButton>();
 
 	private BeanFieldGroup binder;
 
@@ -139,6 +140,8 @@ public abstract class FormCreator<T> {
 			if (field instanceof FormField) {
 				FormField formField = (FormField) field;
 				fieldsOfForm.put(formField.getFieldName(), formField);
+			} else if (field instanceof FormButton) {
+				buttonsOfForm.put(((FormButton)field).getButtonName(), (FormButton)field);
 			}
 		}
 	}
@@ -209,6 +212,8 @@ public abstract class FormCreator<T> {
 	}
 
 	public FormButton getButton(String buttonName) {
+		if (buttonsOfForm.containsKey(buttonName))
+			return buttonsOfForm.get(buttonName);
 		for (FormButton button : buttons) {
 			if (button.getButtonName().equals(buttonName)) {
 				return button;
