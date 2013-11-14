@@ -139,6 +139,34 @@ public class PercentGridRenderTest {
 		testField(created, 81, 100);
 	}
 
+	@Test
+	public void testColumnExpandRationOnSingleField() {
+		GridLayout created = testPercentGridRendererForFormWithField(new ArrayList<FormComponent>() {
+			{
+				add(new FormFieldBuilder("test1", TextField.class).build());
+			}
+		});
+		assertEquals("Problem with label expand Ratio", 0, created.getColumnExpandRatio(0), 0);
+		for (int i = 1; i < 99; i++)
+			assertEquals("Problem with field expand Ratio", 1, created.getColumnExpandRatio(i), 0);
+	}
+
+	@Test
+	public void testColumnExpandRationOnTwoField() {
+		GridLayout created = testPercentGridRendererForFormWithField(new ArrayList<FormComponent>() {
+			{
+				add(new FormFieldBuilder("test1", TextField.class).build());
+				add(new FormFieldBuilder("test2", TextField.class).build());
+			}
+		});
+		assertEquals("Problem with label expand Ratio", 0, created.getColumnExpandRatio(0), 0);
+		assertEquals("Problem with label expand Ratio", 0, created.getColumnExpandRatio(50), 0);
+		for (int i = 1; i < 49; i++)
+			assertEquals("Problem with field expand Ratio", 1, created.getColumnExpandRatio(i), 0);
+		for (int i = 51; i < 99; i++)
+			assertEquals("Problem with field expand Ratio", 1, created.getColumnExpandRatio(i), 0);
+	}
+
 	private GridLayout testPercentGridRendererForFormWithField(ArrayList<FormComponent> fields) {
 		FormCreator formCreator = createTestForm(fields);
 		return new PercentGridRendered().render(formCreator);
@@ -158,7 +186,6 @@ public class PercentGridRenderTest {
 					i++;
 				}
 				addRow(formComponents);
-//				addRow(testFields.toArray(new FormComponent[testFields.size()]));
 			}
 		};
 	}

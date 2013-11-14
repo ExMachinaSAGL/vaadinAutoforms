@@ -1,12 +1,12 @@
 package ch.exmachina.vaadin.autoforms;
 
-import com.sun.tools.javac.util.List;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -38,6 +38,7 @@ public class PercentGridRendered implements GridRender {
 	@Override
 	public GridLayout render(FormCreator formCreator) {
 		this.formCreator = formCreator;
+		colsWithLabel = new HashSet<Integer>();
 		LinkedList<LinkedList<FormComponent>> components = formCreator.components;
 		LinkedList<LinkedList<FormComponent>> designedComponents = designer.addPercents(components);
 		initMainLayout(designedComponents);
@@ -45,7 +46,15 @@ public class PercentGridRendered implements GridRender {
 		for (LinkedList<FormComponent> rowComponents: components) {
 			addElementsToRow(rowComponents, rowIndex++);
 		}
+		setColumnExpandForField();
 		return mainLayout;
+	}
+
+	private void setColumnExpandForField() {
+		for (int i = 0; i < GRID_COL_WIDTH; i++) {
+			if (!colsWithLabel.contains(i))
+				mainLayout.setColumnExpandRatio(i, 1);
+		}
 	}
 
 	private void initMainLayout(LinkedList<LinkedList<FormComponent>> designedComponents) {
@@ -72,6 +81,7 @@ public class PercentGridRendered implements GridRender {
 		colIndex += inRow.getMarginLeftPercent();
 		mainLayout.addComponent(inRow.getLabel(), colIndex, rowIndex, colIndex +inRow.getWidthPercent() - 1, rowIndex);
 		mainLayout.setComponentAlignment(inRow.getLabel(), Alignment.MIDDLE_RIGHT);
+		colsWithLabel.add(colIndex);
 	}
 
 	private void addButtonToRow(FormButton inRow, int colIndex, int rowIndex) {
@@ -109,7 +119,4 @@ public class PercentGridRendered implements GridRender {
 		inRow.getField().setSizeFull();
 	}
 
-
 }
-
-
