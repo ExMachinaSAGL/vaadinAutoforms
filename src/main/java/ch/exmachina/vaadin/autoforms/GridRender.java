@@ -7,5 +7,5 @@ import com.vaadin.ui.Layout;
  */
 
 public interface GridRender {
-	Layout render(FormCreator formCreator);
+	Layout render(UnbindedFormCreator formCreator);
 }

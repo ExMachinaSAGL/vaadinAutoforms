@@ -13,14 +13,14 @@ import java.util.List;
 /**
  * @autor Marco Manzi
  */
-public class FormGridRender implements GridRender{
+public class FormGridRender implements GridRender {
 	private GridLayout mainLayout;
 	private int gridColumnNum = 0;
 	HorizontalLayout buttonLayout;
-	private FormCreator formCreator;
+	private UnbindedFormCreator formCreator;
 
 	@Override
-	public Layout render(FormCreator formCreator) {
+	public Layout render(UnbindedFormCreator formCreator) {
 		this.formCreator = formCreator;
 		initButtonLayout();
 		initMainLayout();
@@ -50,7 +50,7 @@ public class FormGridRender implements GridRender{
 	 * It create the grid layout, size full if to let the form enlarge on window change
 	 */
 	private void createGridLayout() {
-		LinkedList<LinkedList<FormField>> components = formCreator.components;
+		LinkedList<LinkedList<FormComponent>> components = formCreator.components;
 		initGridColumnNum(components);
 
 		int rowSize = formCreator.buttons.size() > 0 ? components.size() + 1 : components.size();
@@ -64,8 +64,8 @@ public class FormGridRender implements GridRender{
 		}
 	}
 
-	private void initGridColumnNum(LinkedList<LinkedList<FormField>> components) {
-		for (LinkedList<FormField> fieldsOfRow : components) {
+	private void initGridColumnNum(LinkedList<LinkedList<FormComponent>> components) {
+		for (LinkedList<FormComponent> fieldsOfRow : components) {
 			int columnForFields = formCreator.getInputFields(fieldsOfRow).size() * 2;
 			int columnForButtons = formCreator.getButtonFields(fieldsOfRow).size();
 			int columnForRow = columnForFields + columnForButtons;

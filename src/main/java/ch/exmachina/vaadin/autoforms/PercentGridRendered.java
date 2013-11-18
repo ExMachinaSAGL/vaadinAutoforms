@@ -17,7 +17,7 @@ public class PercentGridRendered implements GridRender {
 	private GridLayout mainLayout;
 	static int GRID_COL_WIDTH = 100;
 	private PercentGridDesigner designer;
-	private FormCreator formCreator;
+	private UnbindedFormCreator formCreator;
 	private Set<Integer> colsWithLabel;
 
 	public PercentGridRendered() {
@@ -36,7 +36,7 @@ public class PercentGridRendered implements GridRender {
 	}
 
 	@Override
-	public GridLayout render(FormCreator formCreator) {
+	public GridLayout render(UnbindedFormCreator formCreator) {
 		this.formCreator = formCreator;
 		colsWithLabel = new HashSet<Integer>();
 		LinkedList<LinkedList<FormComponent>> components = formCreator.components;

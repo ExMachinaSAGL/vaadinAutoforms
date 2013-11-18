@@ -25,7 +25,7 @@ public class FormButton implements FormComponent{
 	}
 
 	@Override
-	public FormComponent setupForForm(FormCreator formCreator) {
+	public FormComponent setupForForm(UnbindedFormCreator formCreator) {
 		button.setCaption(formCreator.getLabelFor(buttonName));
 		return this;
 	}

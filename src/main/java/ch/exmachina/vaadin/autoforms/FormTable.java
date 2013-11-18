@@ -32,7 +32,7 @@ public class FormTable extends FormField {
 	}
 
 	@Override
-	public FormComponent setupForForm(FormCreator formCreator) {
+	public FormComponent setupForForm(UnbindedFormCreator formCreator) {
 
 		for (TableColumn column : columns) {
 			getTable().setColumnHeader(column.getColumnName(), formCreator.getLabelFor("table." + column.getColumnName()));

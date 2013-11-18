@@ -39,7 +39,7 @@ public class FormLabel implements FormComponent {
 	}
 
 	@Override
-	public FormComponent setupForForm(FormCreator formCreator) {
+	public FormComponent setupForForm(UnbindedFormCreator formCreator) {
 		label.setValue(formCreator.getLabelFor(name));
 		label.addStyleName(formCreator.getStyleNameFor(name) + "-label");
 		return this;

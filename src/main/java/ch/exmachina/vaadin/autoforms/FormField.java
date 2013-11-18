@@ -86,7 +86,7 @@ public class FormField implements FormComponent {
 
 
 	@Override
-	public FormComponent setupForForm(FormCreator formCreator) {
+	public FormComponent setupForForm(UnbindedFormCreator formCreator) {
 		fieldLabel.setValue(formCreator.getLabelFor(fieldName));
 		fieldLabel.addStyleName(formCreator.getStyleNameFor(fieldName) + "-label");
 		field.addStyleName(formCreator.getStyleNameFor(fieldName) + "-field");
