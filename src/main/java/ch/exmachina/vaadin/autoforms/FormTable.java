@@ -69,6 +69,10 @@ public class FormTable extends FormField {
 		item.getItemProperty(DELETE_BUTTON).setValue(button);
 	}
 
+	public void setNotDeletable(Object itemId) {
+		getTable().getItem(itemId).getItemProperty(DELETE_BUTTON).setValue(null);
+	}
+
 	public Table getTable() {
 		return (Table) field;
 	}
