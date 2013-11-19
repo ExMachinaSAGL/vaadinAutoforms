@@ -90,6 +90,7 @@ public class PercentGridRendered implements GridRender {
 		HorizontalLayout buttonContainer = new HorizontalLayout();
 		buttonContainer.addComponent(inRow.getButton());
 		mainLayout.addComponent(inRow.getButton(), colIndex, rowIndex, fieldEndCols, rowIndex);
+		mainLayout.setComponentAlignment(inRow.getButton(), Alignment.BOTTOM_LEFT);
 	}
 
 	private void addFieldToRow(FormField inRow, int colIndex, int rowIndex) {
