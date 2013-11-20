@@ -14,6 +14,8 @@ public class FormTable extends FormField {
 
 	private Resource deleteButtonIcon;
 
+	private ClickListener listener;
+
 	public FormTable(String fieldName, TableColumn... columns) {
 		super(fieldName, Table.class);
 		this.columns = columns;
@@ -63,10 +65,18 @@ public class FormTable extends FormField {
 		button.addClickListener(new Button.ClickListener() {
 			@Override
 			public void buttonClick(Button.ClickEvent clickEvent) {
-				getTable().removeItem(itemId);
+				if (listener == null) {
+					getTable().removeItem(itemId);
+				} else {
+					listener.onClick(itemId);
+				}
 			}
 		});
 		item.getItemProperty(DELETE_BUTTON).setValue(button);
+	}
+
+	public void setDeleteButtonClickListener(ClickListener listener) {
+		this.listener = listener;
 	}
 
 	public void setNotDeletable(Object itemId) {
@@ -75,5 +85,9 @@ public class FormTable extends FormField {
 
 	public Table getTable() {
 		return (Table) field;
+	}
+
+	public interface ClickListener {
+		void onClick(Object itemId);
 	}
 }
