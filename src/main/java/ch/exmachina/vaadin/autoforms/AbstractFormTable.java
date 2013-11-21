@@ -26,6 +26,7 @@ public abstract class AbstractFormTable extends FormField {
 
 		getTable().setEditable(true);
 		getTable().setSelectable(true);
+		getTable().setMultiSelect(true);
 	}
 
 	@Override
