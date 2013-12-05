@@ -18,7 +18,7 @@ public class CurrencyTextField extends ConstrainedTextField {
 				TextField source = (TextField) event.getSource();
 				String value = source.getValue();
 
-				if (!StringUtils.isBlank(value)) {
+				if (StringUtils.isBlank(value)) {
 					return;
 				}
 
