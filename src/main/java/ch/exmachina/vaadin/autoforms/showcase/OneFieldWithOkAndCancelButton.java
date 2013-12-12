@@ -15,13 +15,13 @@ public class OneFieldWithOkAndCancelButton extends AbstractFormCreator<TestModel
 
 	protected void initFields() {
 		addRow(new FormField("name", TextField.class));
-		addButton(new FormButton("Ok", new Button.ClickListener() {
+		addRow(new FormButton("Ok", new Button.ClickListener() {
 			@Override
 			public void buttonClick(Button.ClickEvent event) {
 
 			}
 		}));
-		addButton(new FormButton("Cancel", new Button.ClickListener() {
+		addRow(new FormButton("Cancel", new Button.ClickListener() {
 			@Override
 			public void buttonClick(Button.ClickEvent event) {
 				//To change body of implemented methods use File | Settings | File Templates.

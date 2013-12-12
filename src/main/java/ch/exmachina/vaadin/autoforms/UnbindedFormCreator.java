@@ -78,18 +78,6 @@ public abstract class UnbindedFormCreator {
 		}
 	}
 
-	/**
-	 * Deprecated, it's used only in the form grid rendere to add button to a
-	 * row after all other fields.
-	 * Call addRow with a FormButton inside to add buttons
-	 *
-	 * @param buttons
-	 */
-	@Deprecated
-	protected void addButton(FormButton... buttons) {
-		this.buttons.addAll(new LinkedList<FormButton>(Arrays.asList(buttons)));
-	}
-
 	LinkedList<FormField> getInputFields(LinkedList<FormComponent> rowFields) {
 		LinkedList<FormField> formFields = new LinkedList<FormField>();
 		for (FormComponent comp : rowFields) {
