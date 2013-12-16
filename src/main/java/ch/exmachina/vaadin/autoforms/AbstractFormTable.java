@@ -35,6 +35,7 @@ public abstract class AbstractFormTable extends FormField {
 			getTable().setColumnHeader(column.getColumnName(), formCreator.getLabelFor("table." + column.getColumnName()));
 		}
 		getTable().setColumnHeader(DELETE_BUTTON, "");
+		getTable().setColumnWidth(DELETE_BUTTON, 22);
 
 		return super.setupForForm(formCreator);
 	}
