@@ -40,6 +40,7 @@ public abstract class AbstractFormTable extends FormField {
 		return super.setupForForm(formCreator);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void addRow(final Object itemId, Object... colValues) {
 		assertColumnsCount(colValues);
 
@@ -61,6 +62,7 @@ public abstract class AbstractFormTable extends FormField {
 		item.getItemProperty(DELETE_BUTTON).setValue(button);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Item addNewItemWithValues(Object itemId, Object[] colValues) {
 		Item item = getTable().addItem(itemId);
 
@@ -79,6 +81,7 @@ public abstract class AbstractFormTable extends FormField {
 		this.listener = listener;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setNotDeletable(Object itemId) {
 		getTable().getItem(itemId).getItemProperty(DELETE_BUTTON).setValue(null);
 	}
