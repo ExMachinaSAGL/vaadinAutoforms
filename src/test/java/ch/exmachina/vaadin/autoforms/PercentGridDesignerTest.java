@@ -1,6 +1,5 @@
 package ch.exmachina.vaadin.autoforms;
 
-import com.vaadin.ui.Button;
 import com.vaadin.ui.TextField;
 import org.junit.Assert;
 import org.junit.Test;

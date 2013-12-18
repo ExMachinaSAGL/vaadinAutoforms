@@ -96,7 +96,7 @@ public class PercentGridRenderTest {
 
 	@Test
 	public void testOneFieldWithMarginAndOneButton() {
-		GridLayout created = testPercentGridRendererForFormWithField(new ArrayList() {
+		GridLayout created = testPercentGridRendererForFormWithField(new ArrayList<FormComponent>() {
 			{
 				add(new FormFieldBuilder("test1", TextField.class).width(30).marginLeft(10).build());
 				add(new FormButton("testButton", null));
@@ -184,12 +184,12 @@ public class PercentGridRenderTest {
 	}
 
 	private GridLayout testPercentGridRendererForFormWithField(ArrayList<FormComponent> fields, int numColumns) {
-		FormCreator formCreator = createTestForm(fields, numColumns);
+		FormCreator<?> formCreator = createTestForm(fields, numColumns);
 		return new PercentGridRendered(numColumns).render(formCreator);
 	}
 
-	private FormCreator createTestForm(final List<FormComponent> testFields, int numColumns) {
-		return new FormCreator(new PercentGridRendered(numColumns)) {
+	private FormCreator<?> createTestForm(final List<FormComponent> testFields, int numColumns) {
+		return new FormCreator<Void>(new PercentGridRendered(numColumns)) {
 			@Override
 			protected void beforeRendering() {}
 

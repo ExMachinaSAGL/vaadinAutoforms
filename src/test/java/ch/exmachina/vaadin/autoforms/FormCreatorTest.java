@@ -4,8 +4,6 @@ import ch.exmachina.vaadin.autoforms.showcase.*;
 import com.vaadin.ui.*;
 import org.junit.*;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 /**
@@ -14,11 +12,11 @@ import static org.junit.Assert.*;
 public class FormCreatorTest {
 
 	private FormCreator<TestModel> formWithOneField;
-	private FormCreator formWithTwoFieldOnSameRow;
-	private FormCreator formWithTwoFieldsOnTwoRow;
-	private FormCreator formWithAComboBox;
-	private FormCreator formWithOneFieldAndTwoButton;
-	private FormCreator localizedFormWithOneField;
+	private FormCreator<?> formWithTwoFieldOnSameRow;
+	private FormCreator<?> formWithTwoFieldsOnTwoRow;
+	private FormCreator<?> formWithAComboBox;
+	private FormCreator<?> formWithOneFieldAndTwoButton;
+	private FormCreator<?> localizedFormWithOneField;
 	private OneFieldOnFirstRowReadOnly formWithOneFieldReadOnly;
 	private OneFieldOnFirstRowWithButton formWithOneFieldAndButtonOnSameRow;
 
@@ -34,19 +32,19 @@ public class FormCreatorTest {
 		formWithOneFieldAndButtonOnSameRow = new OneFieldOnFirstRowWithButton();
 	}
 
-	private GridLayout getFormCreatorContainer (FormCreator form) {
+	private GridLayout getFormCreatorContainer (FormCreator<?> form) {
 		return (GridLayout)form.getMainLayout();
 	}
 
-	private Component getElementOnGridPosition(FormCreator form, int column, int row) {
+	private Component getElementOnGridPosition(FormCreator<?> form, int column, int row) {
 		return getFormCreatorContainer(form).getComponent(column, row);
 	}
 
-	private AbstractField getField(FormCreator form, int column, int row) {
-		return (AbstractField) getElementOnGridPosition(form, column, row);
+	private AbstractField<?> getField(FormCreator<?> form, int column, int row) {
+		return (AbstractField<?>) getElementOnGridPosition(form, column, row);
 	}
 
-	private Label getLabelForField(FormCreator form, int column, int row) {
+	private Label getLabelForField(FormCreator<?> form, int column, int row) {
 		return (Label)getElementOnGridPosition(form, column, row);
 	}
 
