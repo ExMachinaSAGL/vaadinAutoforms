@@ -1,18 +1,16 @@
 package ch.exmachina.vaadin.autoforms;
 
 import ch.exmachina.vaadin.autoforms.containers.utils.ContainerUtils;
-import com.vaadin.data.fieldgroup.*;
-import com.vaadin.server.Sizeable;
-import com.vaadin.ui.*;
 
-import java.util.*;
+import com.vaadin.data.fieldgroup.*;
+import com.vaadin.ui.*;
 
 /**
  * @autor Marco Manzi
  */
 public abstract class FormCreator<T> extends UnbindedFormCreator {
 
-	private BeanFieldGroup binder;
+	private BeanFieldGroup<T> binder;
 
 	private T bean;
 
@@ -40,7 +38,7 @@ public abstract class FormCreator<T> extends UnbindedFormCreator {
 	public T commit() {
 		try {
 			binder.commit();
-			return (T) binder.getItemDataSource().getBean();
+			return binder.getItemDataSource().getBean();
 		} catch (FieldGroup.CommitException e) {
 //			throw new IllegalArgumentException(e);
 			return null;
@@ -62,7 +60,7 @@ public abstract class FormCreator<T> extends UnbindedFormCreator {
 	 * @return Model of the form
 	 */
 	public T getBean() {
-		return (T) binder.getItemDataSource().getBean();
+		return binder.getItemDataSource().getBean();
 	}
 
 	/**
@@ -88,6 +86,7 @@ public abstract class FormCreator<T> extends UnbindedFormCreator {
 	/**
 	 * Setup the binder to the bean
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void bindToBean() {
 		binder = new BeanFieldGroup(bean.getClass());
 		validationManager.addRequiredValidationAndValidateOnBlur(binder);
@@ -96,8 +95,8 @@ public abstract class FormCreator<T> extends UnbindedFormCreator {
 		for (String fieldName : fieldsOfForm.keySet()) {
 			FormField formField = fieldsOfForm.get(fieldName);
 			if (formField.useBinder()) {
-				Field field = formField.getField();
-				binder.bind((Field<?>) field, fieldName);
+				Field<?> field = formField.getField();
+				binder.bind(field, fieldName);
 			}
 		}
 		setBean(bean);

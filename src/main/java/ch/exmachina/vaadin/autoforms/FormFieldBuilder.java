@@ -10,11 +10,11 @@ import com.vaadin.ui.AbstractSelect;
 public class FormFieldBuilder {
 	private FormField formField;
 
-	public FormFieldBuilder(String fieldName, AbstractField field) {
+	public FormFieldBuilder(String fieldName, AbstractField<?> field) {
 		formField = new FormField(fieldName, field);
 	}
 
-	public FormFieldBuilder(String fieldName, Class<? extends AbstractField> fieldClass) {
+	public FormFieldBuilder(String fieldName, Class<? extends AbstractField<?>> fieldClass) {
 		formField = new FormField(fieldName, fieldClass);
 	}
 

@@ -12,6 +12,7 @@ public class LocalizedWithOneFieldForm extends AbstractFormCreator<TestModel> im
 		super(new TestModel());
 	}
 
+	@Override
 	protected void initFields() {
 		addRow(new FormField("name", TextField.class));
 	}

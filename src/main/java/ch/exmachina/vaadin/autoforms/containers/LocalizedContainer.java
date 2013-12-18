@@ -16,6 +16,7 @@ public abstract class LocalizedContainer extends IndexedContainer {
 		select.addContainerProperty(CAPTION, String.class, null);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Item addItem(Object itemId) {
 		Item newItem = super.addItem(itemId);

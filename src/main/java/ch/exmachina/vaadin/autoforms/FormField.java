@@ -2,7 +2,6 @@ package ch.exmachina.vaadin.autoforms;
 
 import ch.exmachina.vaadin.autoforms.containers.FilteredContainer;
 import com.vaadin.data.Container;
-import com.vaadin.data.Validator;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 
@@ -10,7 +9,7 @@ import com.vaadin.ui.*;
  * @autor Marco Manzi
  */
 public class FormField implements FormComponent {
-	protected AbstractField field;
+	protected AbstractField<?> field;
 	private Label fieldLabel;
 	private String fieldName;
 	private boolean immediate = true;
@@ -31,8 +30,8 @@ public class FormField implements FormComponent {
 	 * @param fieldName
 	 * @param fieldClass
 	 */
-	public FormField(String fieldName, Class<? extends AbstractField> fieldClass) {
-		this(fieldName, (AbstractField) wrapNewInstantiation(fieldClass));
+	public FormField(String fieldName, Class<? extends AbstractField<?>> fieldClass) {
+		this(fieldName, (AbstractField<?>) wrapNewInstantiation(fieldClass));
 	}
 
 	/**
@@ -40,7 +39,7 @@ public class FormField implements FormComponent {
 	 * @param fieldName
 	 * @param field
 	 */
-	public FormField(String fieldName, AbstractField field) {
+	public FormField(String fieldName, AbstractField<?> field) {
 		this.field = field;
 		field.setSizeFull();
 		field.setImmediate(immediate);
@@ -52,7 +51,7 @@ public class FormField implements FormComponent {
 		}
 	}
 
-	private static Object wrapNewInstantiation(Class<? extends AbstractField> fieldClass) {
+	private static Object wrapNewInstantiation(Class<? extends AbstractField<?>> fieldClass) {
 		try {
 			return fieldClass.newInstance();
 		} catch (Exception e) {
@@ -81,7 +80,7 @@ public class FormField implements FormComponent {
 	private void setupContainer(AbstractSelect field, Container container) {
 		field.setContainerDataSource(container);
 		if (container instanceof FilteredContainer)
-			((FilteredContainer) container).setOn(field);
+			((FilteredContainer<?>) container).setOn(field);
 	}
 
 
@@ -102,7 +101,7 @@ public class FormField implements FormComponent {
 		this.getField().setRequired(true);
 	}
 
-	public AbstractField getField() {
+	public AbstractField<?> getField() {
 		return field;
 	}
 
@@ -140,22 +139,27 @@ public class FormField implements FormComponent {
 		return this.readOnly;
 	}
 
+	@Override
 	public int getWidthPercent() {
 		return widthPercent;
 	}
 
+	@Override
 	public void setWidthPercent(int widthPercent) {
 		this.widthPercent = widthPercent;
 	}
 
+	@Override
 	public int getMarginLeftPercent() {
 		return marginLeftPercent;
 	}
 
+	@Override
 	public void setMarginLeftPercent(int marginLeftPercent) {
 		this.marginLeftPercent = marginLeftPercent;
 	}
 
+	@Override
 	public boolean hasAutomaticWidth() {
 		return widthPercent == 0;
 	}

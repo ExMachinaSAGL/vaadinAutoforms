@@ -1,7 +1,6 @@
 package ch.exmachina.vaadin.autoforms.showcase;
 
 import ch.exmachina.vaadin.autoforms.FormButton;
-import ch.exmachina.vaadin.autoforms.FormCreator;
 import ch.exmachina.vaadin.autoforms.FormField;
 import com.vaadin.ui.TextField;
 
@@ -15,6 +14,7 @@ public class OneFieldOnFirstRowWithButton extends AbstractFormCreator<TestModel>
 		super(new TestModel());
 	}
 
+	@Override
 	protected void initFields() {
 		addRow(new FormField("name", TextField.class), new FormButton("save", null));
 	}

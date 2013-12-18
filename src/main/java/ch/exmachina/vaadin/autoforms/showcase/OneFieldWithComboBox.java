@@ -1,7 +1,7 @@
 package ch.exmachina.vaadin.autoforms.showcase;
 
-import ch.exmachina.vaadin.autoforms.FormCreator;
 import ch.exmachina.vaadin.autoforms.FormField;
+
 import com.vaadin.data.Container;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.IndexedContainer;
@@ -17,6 +17,8 @@ public class OneFieldWithComboBox extends AbstractFormCreator<TestModel> {
 		super(new TestModel());
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
 	protected void initFields() {
 		Container datasource = new IndexedContainer();
 		datasource.addContainerProperty("id", Integer.class, 0);

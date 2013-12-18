@@ -3,13 +3,11 @@ package ch.exmachina.vaadin.autoforms.containers.utils;
 import com.vaadin.ui.AbstractField;
 import com.vaadin.ui.AbstractSelect;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * @autor Marco Manzi
  */
 public class ContainerUtils {
-	public static <T> void setOnSelectContainerBeanValue(T bean, String fieldName, AbstractField field) {
+	public static <T> void setOnSelectContainerBeanValue(T bean, String fieldName, AbstractField<?> field) {
 		if (field instanceof AbstractSelect) {
 			AbstractSelect select = ((AbstractSelect) field);
 			if (select.getContainerDataSource().getItemIds().size() == 0) {

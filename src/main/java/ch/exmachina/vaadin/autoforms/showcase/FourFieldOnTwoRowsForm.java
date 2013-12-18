@@ -1,6 +1,5 @@
 package ch.exmachina.vaadin.autoforms.showcase;
 
-import ch.exmachina.vaadin.autoforms.FormCreator;
 import ch.exmachina.vaadin.autoforms.FormField;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.TextArea;

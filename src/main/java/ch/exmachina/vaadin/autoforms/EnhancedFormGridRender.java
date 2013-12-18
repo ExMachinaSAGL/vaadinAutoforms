@@ -2,7 +2,6 @@ package ch.exmachina.vaadin.autoforms;
 
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.HorizontalLayout;
 
 import java.util.LinkedList;
 import java.util.List;

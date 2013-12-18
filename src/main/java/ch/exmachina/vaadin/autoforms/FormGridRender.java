@@ -4,11 +4,9 @@ import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
-import ch.exmachina.vaadin.autoforms.GridCellInfoBuilder.GridCellInfo;
 import com.vaadin.ui.Layout;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @autor Marco Manzi
@@ -92,6 +90,8 @@ public class FormGridRender implements GridRender {
 					break;
 				case BUTTON:
 					column = addButtonToGrid((FormButton) formField, column, row);
+					break;
+				case LABEL:
 					break;
 			}
 

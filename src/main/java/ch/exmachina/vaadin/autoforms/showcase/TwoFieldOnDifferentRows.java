@@ -1,6 +1,5 @@
 package ch.exmachina.vaadin.autoforms.showcase;
 
-import ch.exmachina.vaadin.autoforms.FormCreator;
 import ch.exmachina.vaadin.autoforms.FormField;
 import com.vaadin.ui.TextField;
 
@@ -14,6 +13,7 @@ public class TwoFieldOnDifferentRows extends AbstractFormCreator<TestModel> {
 		super(new TestModel());
 	}
 
+	@Override
 	protected void initFields() {
 		addRow(new FormField("name", TextField.class));
 		addRow(new FormField("surname", TextField.class));

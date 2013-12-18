@@ -14,6 +14,7 @@ public class FormTreeTable extends AbstractFormTable {
 		getTable().setEditable(false);
 	}
 
+	@Override
 	public void addRow(final Object itemId, Object... colValues) {
 		super.addRow(itemId, colValues);
 
@@ -38,6 +39,7 @@ public class FormTreeTable extends AbstractFormTable {
 		return getTable().removeItem(itemId);
 	}
 
+	@Override
 	public TreeTable getTable() {
 		return (TreeTable) field;
 	}

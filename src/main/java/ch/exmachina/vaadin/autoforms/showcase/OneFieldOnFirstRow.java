@@ -13,6 +13,7 @@ public class OneFieldOnFirstRow extends AbstractFormCreator<TestModel> {
 		super(new TestModel());
 	}
 
+	@Override
 	protected void initFields() {
 		addRow(new FormField("name", TextField.class));
 

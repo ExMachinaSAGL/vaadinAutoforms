@@ -2,7 +2,6 @@ package ch.exmachina.vaadin.autoforms.components;
 
 import com.vaadin.event.FieldEvents.*;
 import com.vaadin.ui.TextField;
-import org.apache.commons.lang3.StringUtils;
 
 public abstract class ConstrainedTextField extends TextField implements TextChangeListener {
 
