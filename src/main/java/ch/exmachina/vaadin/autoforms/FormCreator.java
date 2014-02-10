@@ -94,6 +94,10 @@ public abstract class FormCreator<T> extends UnbindedFormCreator {
 
 		for (String fieldName : fieldsOfForm.keySet()) {
 			FormField formField = fieldsOfForm.get(fieldName);
+
+			//clean all previous validation errors, if present
+			formField.getField().setComponentError(null);
+
 			if (formField.useBinder()) {
 				Field<?> field = formField.getField();
 				binder.bind(field, fieldName);
