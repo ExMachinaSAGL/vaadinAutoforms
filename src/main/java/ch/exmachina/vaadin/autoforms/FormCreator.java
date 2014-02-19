@@ -8,7 +8,7 @@ import com.vaadin.ui.*;
 /**
  * @autor Marco Manzi
  */
-public abstract class FormCreator<T> extends UnbindedFormCreator {
+public abstract class FormCreator<T> extends UnboundFormCreator {
 
 	private BeanFieldGroup<T> binder;
 
@@ -79,7 +79,7 @@ public abstract class FormCreator<T> extends UnbindedFormCreator {
 		}
 	}
 
-	protected T getNotBindedBean() {
+	protected T getUnboundBean() {
 		return bean;
 	}
 

@@ -5,7 +5,7 @@ import com.vaadin.ui.Layout;
 
 import java.util.*;
 
-public abstract class UnbindedFormCreator {
+public abstract class UnboundFormCreator {
 	protected Map<String, FormField> fieldsOfForm = new HashMap<String, FormField>();
 
 	LinkedList<LinkedList<FormComponent>> components = new LinkedList<LinkedList<FormComponent>>();
@@ -16,11 +16,11 @@ public abstract class UnbindedFormCreator {
 
 	private Map<String, FormButton> buttonsOfForm = new HashMap<String, FormButton>();
 
-	public UnbindedFormCreator() {
+	public UnboundFormCreator() {
 		this(new FormGridRender());
 	}
 
-	public UnbindedFormCreator(GridRender gridRender) {
+	public UnboundFormCreator(GridRender gridRender) {
 		initFields();
 		mainLayout = gridRender.render(this);
 	}

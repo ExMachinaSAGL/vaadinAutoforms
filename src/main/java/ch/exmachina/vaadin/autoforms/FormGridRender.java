@@ -15,10 +15,10 @@ public class FormGridRender implements GridRender {
 	private GridLayout mainLayout;
 	private int gridColumnNum = 0;
 	HorizontalLayout buttonLayout;
-	private UnbindedFormCreator formCreator;
+	private UnboundFormCreator formCreator;
 
 	@Override
-	public Layout render(UnbindedFormCreator formCreator) {
+	public Layout render(UnboundFormCreator formCreator) {
 		this.formCreator = formCreator;
 		initButtonLayout();
 		initMainLayout();

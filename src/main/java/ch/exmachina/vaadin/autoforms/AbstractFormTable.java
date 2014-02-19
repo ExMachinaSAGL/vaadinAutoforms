@@ -30,7 +30,7 @@ public abstract class AbstractFormTable extends FormField {
 	}
 
 	@Override
-	public FormComponent setupForForm(UnbindedFormCreator formCreator) {
+	public FormComponent setupForForm(UnboundFormCreator formCreator) {
 		for (TableColumn column : columns) {
 			getTable().setColumnHeader(column.getColumnName(), formCreator.getLabelFor("table." + column.getColumnName()));
 		}
