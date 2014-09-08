@@ -24,6 +24,10 @@ public abstract class FormCreator<T> extends UnboundFormCreator {
 		super();
 	}
 
+	public FormCreator(InitMode initMode) {
+		super(initMode);
+	}
+	
 	protected final void initWithBean(T bean) {
 		this.bean = bean;
 		bindToBean();

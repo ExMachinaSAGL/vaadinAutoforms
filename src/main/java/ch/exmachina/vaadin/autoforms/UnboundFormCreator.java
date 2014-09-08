@@ -1,9 +1,9 @@
 package ch.exmachina.vaadin.autoforms;
 
+import java.util.*;
+
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Layout;
-
-import java.util.*;
 
 public abstract class UnboundFormCreator {
 	protected Map<String, FormField> fieldsOfForm = new HashMap<String, FormField>();
@@ -16,13 +16,35 @@ public abstract class UnboundFormCreator {
 
 	private Map<String, FormButton> buttonsOfForm = new HashMap<String, FormButton>();
 
+	protected enum InitMode {
+		CONSTRUCTOR, POST_CONSTRUCT
+	}
+	
+	private GridRender gridRender;
+
 	public UnboundFormCreator() {
-		this(new FormGridRender());
+		this(new FormGridRender(), InitMode.CONSTRUCTOR);
 	}
 
 	public UnboundFormCreator(GridRender gridRender) {
+		this(gridRender, InitMode.CONSTRUCTOR);
+	}
+
+	public UnboundFormCreator(InitMode initMode) {
+		this(new FormGridRender(), initMode);
+	}
+
+	private UnboundFormCreator(GridRender gridRender, InitMode initMode) {
+		this.gridRender = gridRender;
+		if (initMode == InitMode.CONSTRUCTOR) {
+			init();
+		}
+	}
+
+	public void init() {
 		initFields();
 		mainLayout = gridRender.render(this);
+		gridRender = null;
 	}
 
 	public Layout getMainLayout() {
@@ -39,8 +61,9 @@ public abstract class UnboundFormCreator {
 
 	/**
 	 * Return the current value for the field
-	 *
-	 * @param fieldName name of the field to check
+	 * 
+	 * @param fieldName
+	 *            name of the field to check
 	 * @return value on field current setted
 	 */
 	public Object getValueFor(String fieldName) {
@@ -48,21 +71,19 @@ public abstract class UnboundFormCreator {
 	}
 
 	/**
-	 * Used to apply the last customization of layout, like styles.
-	 * Normally a default style is used, in this method with getComponent and getAllComponents you can
-	 * modify the default style or make last minute changes
+	 * Used to apply the last customization of layout, like styles. Normally a default style is used, in this method
+	 * with getComponent and getAllComponents you can modify the default style or make last minute changes
 	 */
 	protected abstract void beforeRendering();
 
 	/**
-	 * Setup the field to be showed in the form, use addRow to add FormField and
-	 * addButton to add buttons
+	 * Setup the field to be showed in the form, use addRow to add FormField and addButton to add buttons
 	 */
 	protected abstract void initFields();
 
 	/**
-	 * Add a row to the form, the fields can have a width's sum  <= 100
-	 *
+	 * Add a row to the form, the fields can have a width's sum <= 100
+	 * 
 	 * @param fields
 	 */
 	protected void addRow(FormComponent... fields) {
