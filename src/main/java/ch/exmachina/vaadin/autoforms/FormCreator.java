@@ -1,5 +1,9 @@
 package ch.exmachina.vaadin.autoforms;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import ch.exmachina.vaadin.autoforms.containers.utils.ContainerUtils;
 
 import com.vaadin.data.fieldgroup.*;
@@ -28,9 +32,9 @@ public abstract class FormCreator<T> extends UnboundFormCreator {
 		super(initMode);
 	}
 	
-	protected final void initWithBean(T bean) {
+	protected final void initWithBean(T bean, String... excludedFields) {
 		this.bean = bean;
-		bindToBean();
+		bindToBean(Arrays.asList(excludedFields));
 	}
 
 	/**
@@ -91,20 +95,22 @@ public abstract class FormCreator<T> extends UnboundFormCreator {
 	 * Setup the binder to the bean
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void bindToBean() {
+	private void bindToBean(List<String> excludedFields) {
 		binder = new BeanFieldGroup(bean.getClass());
 		validationManager.addRequiredValidationAndValidateOnBlur(binder);
 		validationManager.setErrorMessage(getLabelFor(ValidationManager.KEY_REQUIRED_ERROR));
 
 		for (String fieldName : fieldsOfForm.keySet()) {
-			FormField formField = fieldsOfForm.get(fieldName);
+			if (!excludedFields.contains(fieldName)) {
+				FormField formField = fieldsOfForm.get(fieldName);
 
-			//clean all previous validation errors, if present
-			formField.getField().setComponentError(null);
+				//clean all previous validation errors, if present
+				formField.getField().setComponentError(null);
 
-			if (formField.useBinder()) {
-				Field<?> field = formField.getField();
-				binder.bind(field, fieldName);
+				if (formField.useBinder()) {
+					Field<?> field = formField.getField();
+					binder.bind(field, fieldName);
+				}
 			}
 		}
 		setBean(bean);
